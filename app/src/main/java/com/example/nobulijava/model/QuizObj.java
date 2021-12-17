@@ -1,0 +1,39 @@
+package com.example.nobulijava.model;
+
+public class QuizObj {
+    private String question;
+    private Boolean answer;
+
+    public QuizObj(String question, Boolean answer) {
+        this.question = question;
+        this.answer = answer;
+    }
+
+    public QuizObj(){
+
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public Boolean getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(Boolean answer) {
+        this.answer = answer;
+    }
+
+    @Override
+    public String toString() {
+        return "QuizObj{" +
+                "question='" + question + '\'' +
+                ", answer=" + answer +
+                '}';
+    }
+}

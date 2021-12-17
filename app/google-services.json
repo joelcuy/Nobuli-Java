@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "30723945640",
+    "project_id": "nobulibot-ysta",
+    "storage_bucket": "nobulibot-ysta.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:30723945640:android:7e4472699668684b307e9d",
+        "android_client_info": {
+          "package_name": "com.example.nobulijava"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "30723945640-6t40fe1ktg4r4d8hnooslp53feus3ifm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nobulijava",
+            "certificate_hash": "84e9b607a01e14be876f290f5be96b3270bafaa7"
+          }
+        },
+        {
+          "client_id": "30723945640-tsuogaeov3f40f148gsvu1h83prjfigp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-4uNXcyKNnb0mHHTF09lF6dXkUn2TwA8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "30723945640-tsuogaeov3f40f148gsvu1h83prjfigp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

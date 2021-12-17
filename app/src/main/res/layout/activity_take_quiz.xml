@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Quizzes"
+        android:textSize="30sp" />
+
+        <ImageView
+            android:id="@+id/image_quizImage"
+            android:layout_width="300dp"
+            android:layout_height="150dp"
+            android:scaleType="fitXY"
+            android:layout_marginTop="35dp"/>
+
+    <TextView
+        android:id="@+id/textView_takeQuiz_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="24dp"
+        android:gravity="center_horizontal"
+        android:text="@string/question"
+        android:textSize="20sp" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup_answer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radio_true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:text="@string/true_text"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/radio_false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="@string/false_text"
+            android:textSize="16sp" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/button_previous"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="25dp"
+            android:text="Previous" />
+
+        <Button
+            android:id="@+id/button_next"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:text="Next" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/button_tryAgain"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:text="Try Again" />
+
+        <Button
+            android:id="@+id/button_mainMenu"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:text="Main Menu" />
+    </LinearLayout>
+</LinearLayout>
