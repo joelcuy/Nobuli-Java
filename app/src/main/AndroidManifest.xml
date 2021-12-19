@@ -39,7 +39,12 @@
         </activity>
         <activity
             android:name=".activity.SetQuizDetailsActivity"
-            android:exported="false" /> <!-- User Activity -->
+            android:exported="false" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nobulijava.activity.SetQuizListActivity" />
+        </activity>
+        <!-- User Activity -->
         <activity
             android:name=".activity.UserDashboardActivity"
             android:exported="false" />

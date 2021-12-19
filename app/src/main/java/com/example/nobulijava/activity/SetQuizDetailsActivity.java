@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,8 +36,6 @@ public class SetQuizDetailsActivity extends AppCompatActivity{
         // Apply the adapter to the spinner
         spinnerAnswer.setAdapter(adapter);
 
-
-
         buttonSave = (Button) findViewById(R.id.button_saveQuiz);
         editTextQuestion = (EditText) findViewById(R.id.editText_question);
         buttonSave.setOnClickListener(new View.OnClickListener() {
@@ -52,10 +49,4 @@ public class SetQuizDetailsActivity extends AppCompatActivity{
             }
         });
     }
-
-    private void saveQuiz(){
-
-    }
-
-
 }

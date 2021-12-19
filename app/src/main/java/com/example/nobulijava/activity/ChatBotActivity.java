@@ -11,7 +11,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.nobulijava.R;
-import com.example.nobulijava.adapters.ChatAdapter;
+import com.example.nobulijava.adapters.MessageAdapter;
 import com.example.nobulijava.interfaces.BotReply;
 import com.example.nobulijava.model.MessageObj;
 import com.example.nobulijava.utils.SendMessageInBg;
@@ -35,7 +35,7 @@ import java.util.UUID;
 public class ChatBotActivity extends AppCompatActivity implements BotReply {
 
     RecyclerView chatView;
-    ChatAdapter chatAdapter;
+    MessageAdapter messageAdapter;
     List<MessageObj> messageList = new ArrayList<>();
     EditText editMessage;
     ImageButton btnSend;
@@ -57,8 +57,8 @@ public class ChatBotActivity extends AppCompatActivity implements BotReply {
         editMessage = findViewById(R.id.messageBoxEditText);
         btnSend = findViewById(R.id.sendButton);
 
-        chatAdapter = new ChatAdapter(messageList, this);
-        chatView.setAdapter(chatAdapter);
+        messageAdapter = new MessageAdapter(messageList, this);
+        chatView.setAdapter(messageAdapter);
 
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,7 +123,7 @@ public class ChatBotActivity extends AppCompatActivity implements BotReply {
             String botReply = returnResponse.getQueryResult().getFulfillmentText();
             if (!botReply.isEmpty()) {
                 messageList.add(new MessageObj(botReply, true));
-                chatAdapter.notifyDataSetChanged();
+                messageAdapter.notifyDataSetChanged();
                 System.out.println("fuck");
                 Objects.requireNonNull(chatView.getLayoutManager()).scrollToPosition(messageList.size() - 1);
             } else {

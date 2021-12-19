@@ -3,11 +3,11 @@ package com.example.nobulijava.utils
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
-import com.example.nobulijava.adapters.ChatAdapter
+import com.example.nobulijava.adapters.MessageAdapter
 
 class MyScrollToBottomObserver(
     private val recycler: RecyclerView,
-    private val adapter: ChatAdapter,
+    private val adapter: MessageAdapter,
     private val manager: LinearLayoutManager
 ) : AdapterDataObserver() {
     override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {

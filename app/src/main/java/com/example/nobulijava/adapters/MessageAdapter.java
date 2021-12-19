@@ -14,12 +14,12 @@ import com.example.nobulijava.model.MessageObj;
 
 import java.util.List;
 
-public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder>{
+public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyViewHolder>{
 
     private List<MessageObj> messageList;
     private Activity activity;
 
-    public ChatAdapter(List<MessageObj> messageList, Activity activity) {
+    public MessageAdapter(List<MessageObj> messageList, Activity activity) {
         this.messageList = messageList;
         this.activity = activity;
     }
