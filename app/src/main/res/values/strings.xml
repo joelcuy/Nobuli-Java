@@ -15,6 +15,9 @@
     <string name="true_text">True</string>
     <string name="false_text">False</string>
     <string name="question">Question</string>
+    <string name="correct_answer">Your answer is correct!</string>
+    <string name="wrong_answer">Incorrect answer!</string>
+    <string name="score">Your score: </string>
     <string-array name="boolean_array">
         <item>True</item>
         <item>False</item>
