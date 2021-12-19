@@ -32,6 +32,8 @@ public class SetQuizListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_quiz_list);
 
+        getSupportActionBar().setTitle("List of Quizzes");
+
         FABAddQuiz = findViewById(R.id.floatingActionButton_addQuiz);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();

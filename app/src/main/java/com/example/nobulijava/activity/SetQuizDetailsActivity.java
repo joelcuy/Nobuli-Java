@@ -25,6 +25,8 @@ public class SetQuizDetailsActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_quiz_details);
 
+        getSupportActionBar().setTitle("Add Quiz");
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         spinnerAnswer = (Spinner) findViewById(R.id.spinner_answer);

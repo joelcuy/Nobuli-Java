@@ -21,6 +21,9 @@ public class AdminDashboardActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_dashboard);
+
+        getSupportActionBar().setTitle("Admin Dashboard");
+
         buttonSetQuiz = findViewById(R.id.button_setQuiz);
         buttonSetNews =  findViewById(R.id.button_setNews);
 
