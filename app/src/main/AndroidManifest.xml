@@ -11,27 +11,66 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NobuliJava">
-        <activity
-            android:name=".activity.SetQuizListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.SetQuizDetailsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.TakeQuizActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.AboutActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.UserDashboardActivity"
-            android:exported="false" />
+        <!-- Admin Activity -->
         <activity
             android:name=".activity.AdminDashboardActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.ChatBotActivity"
+            android:name=".activity.SetNewsListActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nobulijava.activity.AdminDashboardActivity" />
+        </activity>
+        <activity
+            android:name=".activity.SetQuizListActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nobulijava.activity.AdminDashboardActivity" />
+        </activity>
+        <activity
+            android:name=".activity.SetQuizDetailsActivity"
             android:exported="false" />
+        <!-- User Activity -->
+        <activity
+            android:name=".activity.UserDashboardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AboutActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nobulijava.activity.UserDashboardActivity" />
+        </activity>
+        <activity
+            android:name=".activity.ChatBotActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nobulijava.activity.UserDashboardActivity" />
+        </activity>
+        <activity
+            android:name=".activity.TakeQuizActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nobulijava.activity.UserDashboardActivity" />
+        </activity>
+        <activity
+            android:name=".activity.ReadNewsListActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nobulijava.activity.UserDashboardActivity" />
+        </activity>
+        <activity
+            android:name=".activity.ReportActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nobulijava.activity.UserDashboardActivity" />
+        </activity> <!-- Login Signup -->
         <activity
             android:name=".activity.SignupActivity"
             android:exported="false" />

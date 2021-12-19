@@ -51,6 +51,8 @@ public class ChatBotActivity extends AppCompatActivity implements BotReply {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatbot);
 
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         chatView = findViewById(R.id.chatRecyclerView);
         editMessage = findViewById(R.id.messageBoxEditText);
         btnSend = findViewById(R.id.sendButton);
@@ -77,6 +79,17 @@ public class ChatBotActivity extends AppCompatActivity implements BotReply {
 
         setUpBot();
     }
+
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case android.R.id.home:
+//                NavUtils.navigateUpFromSameTask(this);
+//                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
 
 
     private void setUpBot() {

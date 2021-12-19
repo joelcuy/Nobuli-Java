@@ -66,27 +66,22 @@ public class UserDashboardActivity extends AppCompatActivity implements View.OnC
         switch (v.getId()) {
             case R.id.button_aboutCyberbully:
                 startActivity(new Intent(UserDashboardActivity.this, AboutActivity.class));
-                finish();
                 break;
 
             case R.id.button_chatBot:
                 startActivity(new Intent(UserDashboardActivity.this, ChatBotActivity.class));
-                finish();
                 break;
 
             case R.id.button_quiz:
                 startActivity(new Intent(UserDashboardActivity.this, TakeQuizActivity.class));
-                finish();
                 break;
 
             case R.id.button_news:
-//                startActivity(new Intent(DashboardActivity.this, NewsActivity.class));
-//                finish();
+                startActivity(new Intent(UserDashboardActivity.this, ReadNewsListActivity.class));
                 break;
 
             case R.id.button_report:
-//                startActivity(new Intent(DashboardActivity.this, ReportActivity.class));
-//                finish();
+                startActivity(new Intent(UserDashboardActivity.this, ReportActivity.class));
                 break;
         }
     }

@@ -1,9 +1,11 @@
 package com.example.nobulijava.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -46,6 +48,8 @@ public class TakeQuizActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_quiz);
 
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         // setting up the buttons
@@ -86,6 +90,17 @@ public class TakeQuizActivity extends AppCompatActivity implements View.OnClickL
             }
         });
     }
+
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case android.R.id.home:
+//                NavUtils.navigateUpFromSameTask(this);
+//                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
 
     @Override
     public void onClick(View v) {

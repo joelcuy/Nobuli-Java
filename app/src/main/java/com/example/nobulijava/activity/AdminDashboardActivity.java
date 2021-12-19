@@ -28,15 +28,13 @@ public class AdminDashboardActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(AdminDashboardActivity.this, SetQuizListActivity.class));
-                finish();
             }
         });
 
         buttonSetNews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                startActivity(new Intent(AdminDashboardActivity.this, SetNewsListActivity.class));
-//                finish();
+                startActivity(new Intent(AdminDashboardActivity.this, SetNewsListActivity.class));
             }
         });
     }
