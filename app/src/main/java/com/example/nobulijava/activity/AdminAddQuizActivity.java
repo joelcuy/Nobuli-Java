@@ -44,9 +44,10 @@ public class AdminAddQuizActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 String questionString = editTextQuestion.getText().toString();
+                Boolean answerBoolean = Boolean.valueOf(spinnerAnswer.getSelectedItem().toString());
 
 
-                QuizObj newQuiz = new QuizObj(questionString, Boolean.valueOf(spinnerAnswer.getSelectedItem().toString()));
+                QuizObj newQuiz = new QuizObj(questionString, answerBoolean);
                 mDatabase.child("Quiz").push().setValue(newQuiz);
             }
         });
