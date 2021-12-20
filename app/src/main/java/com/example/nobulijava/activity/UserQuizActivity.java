@@ -1,5 +1,6 @@
 package com.example.nobulijava.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 
 import com.example.nobulijava.R;
 import com.example.nobulijava.model.QuizObj;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -72,21 +75,35 @@ public class UserQuizActivity extends AppCompatActivity implements View.OnClickL
         buttonTryAgain.setVisibility(View.GONE);
         buttonMainMenu.setVisibility(View.GONE);
 
-        mDatabase.child("Quiz").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("Quiz").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot quizSnapshot: dataSnapshot.getChildren()) {
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                for (DataSnapshot quizSnapshot: task.getResult().getChildren()) {
                     QuizObj quizObj = quizSnapshot.getValue(QuizObj.class);
                     quizObjArrayList.add(quizObj);
                     scoreArrayList.add(0);
                 }
                 textViewQuestion.setText(quizObjArrayList.get(0).getQuestion());
             }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
         });
+
+        //Below is live listener, will cause questions to change immediately when admin edits question.
+        //Currently using get(), one-time listener, in midst of testing for bugs.
+//        mDatabase.child("Quiz").addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for (DataSnapshot quizSnapshot: dataSnapshot.getChildren()) {
+//                    QuizObj quizObj = quizSnapshot.getValue(QuizObj.class);
+//                    quizObjArrayList.add(quizObj);
+//                    scoreArrayList.add(0);
+//                }
+//                textViewQuestion.setText(quizObjArrayList.get(0).getQuestion());
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//            }
+//        });
     }
 
 //    @Override
