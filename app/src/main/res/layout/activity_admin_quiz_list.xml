@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.SetQuizListActivity"
+    tools:context=".activity.AdminQuizListActivity"
     android:id="@+id/layout_notes">
 
     <androidx.recyclerview.widget.RecyclerView

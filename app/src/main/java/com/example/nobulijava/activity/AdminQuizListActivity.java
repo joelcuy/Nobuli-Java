@@ -19,47 +19,54 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class SetQuizListActivity extends AppCompatActivity {
+public class AdminQuizListActivity extends AppCompatActivity {
 
     private FloatingActionButton FABAddQuiz;
     private RecyclerView recyclerViewQuizList;
 
     private DatabaseReference mDatabase;
 
-    private ArrayList<QuizObj> quizObjArrayList = new ArrayList<>();
+    private ArrayList<QuizObj> quizObjArrayList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_set_quiz_list);
+        setContentView(R.layout.activity_admin_quiz_list);
 
         getSupportActionBar().setTitle("List of Quizzes");
 
         FABAddQuiz = findViewById(R.id.floatingActionButton_addQuiz);
+        recyclerViewQuizList = findViewById(R.id.recyclerView_quizList);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         FABAddQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SetQuizListActivity.this, SetQuizDetailsActivity.class));
+                startActivity(new Intent(AdminQuizListActivity.this, AdminAddQuizActivity.class));
             }
         });
         mDatabase.child("Quiz").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                quizObjArrayList = new ArrayList<>();
                 for (DataSnapshot quizSnapshot: dataSnapshot.getChildren()) {
                     QuizObj quizObj = quizSnapshot.getValue(QuizObj.class);
+                    quizObj.setQuizID(quizSnapshot.getKey());
                     quizObjArrayList.add(quizObj);
-                    recyclerViewQuizList = findViewById(R.id.recyclerView_quizList);
-                    QuizAdapter quizAdapter = new QuizAdapter(quizObjArrayList);
-                    recyclerViewQuizList.setAdapter(quizAdapter);
+
                 }
+                QuizAdapter quizAdapter = new QuizAdapter(quizObjArrayList);
+                recyclerViewQuizList.setAdapter(quizAdapter);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+
+
+
+
 
 
 

@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-public class ChatBotActivity extends AppCompatActivity implements BotReply {
+public class UserChatBotActivity extends AppCompatActivity implements BotReply {
 
     RecyclerView chatView;
     MessageAdapter messageAdapter;
@@ -49,7 +49,7 @@ public class ChatBotActivity extends AppCompatActivity implements BotReply {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chatbot);
+        setContentView(R.layout.activity_user_chatbot);
 
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -72,7 +72,7 @@ public class ChatBotActivity extends AppCompatActivity implements BotReply {
                     Objects.requireNonNull(chatView.getLayoutManager())
                             .scrollToPosition(messageList.size() - 1);
                 } else {
-                    Toast.makeText(ChatBotActivity.this, "Please enter text!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserChatBotActivity.this, "Please enter text!", Toast.LENGTH_SHORT).show();
                 }
             }
         });

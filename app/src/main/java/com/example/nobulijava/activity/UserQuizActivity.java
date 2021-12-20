@@ -1,11 +1,9 @@
 package com.example.nobulijava.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NavUtils;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -24,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class TakeQuizActivity extends AppCompatActivity implements View.OnClickListener{
+public class UserQuizActivity extends AppCompatActivity implements View.OnClickListener{
     // setting up things
     private RadioButton radioFalse;
     private RadioButton radioTrue;
@@ -46,7 +44,7 @@ public class TakeQuizActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_take_quiz);
+        setContentView(R.layout.activity_user_quiz);
 
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -125,12 +123,12 @@ public class TakeQuizActivity extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.button_tryAgain:
-                startActivity(new Intent(TakeQuizActivity.this, TakeQuizActivity.class));
+                startActivity(new Intent(UserQuizActivity.this, UserQuizActivity.class));
                 finish();
                 break;
 
             case R.id.button_mainMenu:
-                startActivity(new Intent(TakeQuizActivity.this, UserDashboardActivity.class));
+                startActivity(new Intent(UserQuizActivity.this, UserDashboardActivity.class));
                 finish();
                 break;
         }
@@ -168,7 +166,7 @@ public class TakeQuizActivity extends AppCompatActivity implements View.OnClickL
             scoreArrayList.set(currentQuestionIndex, 0);
         }
 
-        Toast.makeText(TakeQuizActivity.this, toastMessageID,
+        Toast.makeText(UserQuizActivity.this, toastMessageID,
                 Toast.LENGTH_SHORT).show();
     }
 

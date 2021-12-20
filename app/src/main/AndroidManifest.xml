@@ -12,11 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NobuliJava">
         <activity
-            android:name=".activity.SetNewsDetailsActivity"
+            android:name=".activity.AdminAddNewsActivity"
             android:exported="false" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.nobulijava.activity.SetNewsListActivity" />
+                android:value="com.example.nobulijava.activity.AdminNewsListActivity" />
         </activity>
 
         <!-- Admin Activity -->
@@ -24,25 +24,25 @@
             android:name=".activity.AdminDashboardActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.SetNewsListActivity"
+            android:name=".activity.AdminNewsListActivity"
             android:exported="false">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.nobulijava.activity.AdminDashboardActivity" />
         </activity>
         <activity
-            android:name=".activity.SetQuizListActivity"
+            android:name=".activity.AdminQuizListActivity"
             android:exported="false">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.nobulijava.activity.AdminDashboardActivity" />
         </activity>
         <activity
-            android:name=".activity.SetQuizDetailsActivity"
+            android:name=".activity.AdminAddQuizActivity"
             android:exported="false" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.nobulijava.activity.SetQuizListActivity" />
+                android:value="com.example.nobulijava.activity.AdminQuizListActivity" />
         </activity>
         <!-- User Activity -->
         <activity
@@ -56,21 +56,21 @@
                 android:value="com.example.nobulijava.activity.ReadNewsListActivity" />
         </activity>
         <activity
-            android:name=".activity.AboutActivity"
+            android:name=".activity.UserAboutActivity"
             android:exported="false">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.nobulijava.activity.UserDashboardActivity" />
         </activity>
         <activity
-            android:name=".activity.ChatBotActivity"
+            android:name=".activity.UserChatBotActivity"
             android:exported="false">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.nobulijava.activity.UserDashboardActivity" />
         </activity>
         <activity
-            android:name=".activity.TakeQuizActivity"
+            android:name=".activity.UserQuizActivity"
             android:exported="false">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -84,7 +84,7 @@
                 android:value="com.example.nobulijava.activity.UserDashboardActivity" />
         </activity>
         <activity
-            android:name=".activity.ReportActivity"
+            android:name=".activity.UserReportActivity"
             android:exported="false">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

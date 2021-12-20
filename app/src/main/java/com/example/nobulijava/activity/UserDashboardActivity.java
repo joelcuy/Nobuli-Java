@@ -65,15 +65,15 @@ public class UserDashboardActivity extends AppCompatActivity implements View.OnC
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_aboutCyberbully:
-                startActivity(new Intent(UserDashboardActivity.this, AboutActivity.class));
+                startActivity(new Intent(UserDashboardActivity.this, UserAboutActivity.class));
                 break;
 
             case R.id.button_chatBot:
-                startActivity(new Intent(UserDashboardActivity.this, ChatBotActivity.class));
+                startActivity(new Intent(UserDashboardActivity.this, UserChatBotActivity.class));
                 break;
 
             case R.id.button_quiz:
-                startActivity(new Intent(UserDashboardActivity.this, TakeQuizActivity.class));
+                startActivity(new Intent(UserDashboardActivity.this, UserQuizActivity.class));
                 break;
 
             case R.id.button_news:
@@ -81,7 +81,7 @@ public class UserDashboardActivity extends AppCompatActivity implements View.OnC
                 break;
 
             case R.id.button_report:
-                startActivity(new Intent(UserDashboardActivity.this, ReportActivity.class));
+                startActivity(new Intent(UserDashboardActivity.this, UserReportActivity.class));
                 break;
         }
     }

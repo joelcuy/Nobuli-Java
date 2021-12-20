@@ -14,7 +14,7 @@ import com.example.nobulijava.model.QuizObj;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class SetQuizDetailsActivity extends AppCompatActivity{
+public class AdminAddQuizActivity extends AppCompatActivity{
     private DatabaseReference mDatabase;
     EditText editTextQuestion;
     Spinner spinnerAnswer;
@@ -23,7 +23,7 @@ public class SetQuizDetailsActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_set_quiz_details);
+        setContentView(R.layout.activity_admin_add_quiz);
 
         getSupportActionBar().setTitle("Add Quiz");
 
