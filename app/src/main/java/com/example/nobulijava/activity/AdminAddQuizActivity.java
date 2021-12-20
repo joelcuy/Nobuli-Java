@@ -49,6 +49,7 @@ public class AdminAddQuizActivity extends AppCompatActivity{
 
                 QuizObj newQuiz = new QuizObj(questionString, answerBoolean);
                 mDatabase.child("Quiz").push().setValue(newQuiz);
+                finish();
             }
         });
     }
