@@ -1,15 +1,24 @@
 package com.example.nobulijava.adapters;
 
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nobulijava.R;
 import com.example.nobulijava.model.QuizObj;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.apache.commons.lang3.text.WordUtils;
 
@@ -17,6 +26,7 @@ import java.util.ArrayList;
 
 public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder>{
     private ArrayList<QuizObj> quizDataSet;
+    private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     /**
      * Initialize the dataset of the Adapter.
      *
@@ -54,7 +64,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
      */
-    public static class QuizViewHolder extends RecyclerView.ViewHolder {
+    public class QuizViewHolder extends RecyclerView.ViewHolder {
         private final TextView textViewQuizNo;
         private final TextView textViewQuestion;
         private final TextView textViewAnswer;
@@ -66,6 +76,48 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
             textViewQuizNo = (TextView) view.findViewById(R.id.textView_quizList_quizNo);
             textViewQuestion = (TextView) view.findViewById(R.id.textView_quizList_question);
             textViewAnswer = (TextView) view.findViewById(R.id.textView_quizList_answer);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //TODO launch update screen
+                    Toast.makeText(view.getContext(), "Short Click at: " + getAdapterPosition(), Toast.LENGTH_LONG).show();
+                }
+            });
+
+            view.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    AlertDialog.Builder alert = new AlertDialog.Builder(view.getContext());
+                    alert.setTitle("Delete");
+                    alert.setMessage("Do you wanna delete this item?");
+                    alert.setCancelable(true);
+
+                    alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+
+                    alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            mDatabase.child("Quiz").child(quizDataSet.get(getAdapterPosition()).getQuizID()).removeValue(new DatabaseReference.CompletionListener() {
+                                @Override
+                                public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                                    //TODO notify deleted
+                                }
+                            });
+                        }
+                    });
+
+                    AlertDialog alertDialog = alert.create();
+                    alertDialog.show();
+                    return true;
+                }
+            });
         }
 
         public void bind(QuizObj quizObj, Integer position){

@@ -3,6 +3,7 @@ package com.example.nobulijava.model;
 public class QuizObj {
     private String question;
     private Boolean answer;
+    private String quizID;
 
     public QuizObj(String question, Boolean answer) {
         this.question = question;
@@ -29,11 +30,20 @@ public class QuizObj {
         this.answer = answer;
     }
 
+    public String getQuizID() {
+        return quizID;
+    }
+
+    public void setQuizID(String quizID) {
+        this.quizID = quizID;
+    }
+
     @Override
     public String toString() {
         return "QuizObj{" +
                 "question='" + question + '\'' +
                 ", answer=" + answer +
+                ", quizID='" + quizID + '\'' +
                 '}';
     }
 }
