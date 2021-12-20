@@ -89,7 +89,9 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
                 @Override
                 public void onClick(View v) {
                     //TODO launch update screen
-                    context.startActivity(new Intent(context, AdminEditQuizActivity.class));
+                    Intent editQuizIntent = new Intent(context, AdminEditQuizActivity.class);
+                    editQuizIntent.putExtra("SelectedQuiz", quizDataSet.get(getAdapterPosition()));
+                    context.startActivity(editQuizIntent);
                 }
             });
 

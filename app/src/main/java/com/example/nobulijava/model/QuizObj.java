@@ -1,6 +1,8 @@
 package com.example.nobulijava.model;
 
-public class QuizObj {
+import java.io.Serializable;
+
+public class QuizObj implements Serializable {
     private String question;
     private Boolean answer;
     private String quizID;
