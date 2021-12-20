@@ -1,6 +1,9 @@
 package com.example.nobulijava.adapters;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nobulijava.R;
+import com.example.nobulijava.activity.AdminEditQuizActivity;
 import com.example.nobulijava.model.QuizObj;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -24,17 +28,21 @@ import org.apache.commons.lang3.text.WordUtils;
 
 import java.util.ArrayList;
 
+import io.opencensus.internal.Utils;
+
 public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder>{
     private ArrayList<QuizObj> quizDataSet;
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+    private final Context context;
     /**
      * Initialize the dataset of the Adapter.
      *
      * @param quizDataSet String[] containing the data to populate views to be used
      * by RecyclerView.
      */
-    public QuizAdapter(ArrayList<QuizObj> quizDataSet) {
+    public QuizAdapter(ArrayList<QuizObj> quizDataSet, Context context) {
         this.quizDataSet = quizDataSet;
+        this.context = context;
     }
 
     // Create new views (invoked by the layout manager
@@ -81,7 +89,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
                 @Override
                 public void onClick(View v) {
                     //TODO launch update screen
-                    Toast.makeText(view.getContext(), "Short Click at: " + getAdapterPosition(), Toast.LENGTH_LONG).show();
+                    context.startActivity(new Intent(context, AdminEditQuizActivity.class));
                 }
             });
 

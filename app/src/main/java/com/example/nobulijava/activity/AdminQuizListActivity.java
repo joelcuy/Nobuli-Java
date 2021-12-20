@@ -55,7 +55,7 @@ public class AdminQuizListActivity extends AppCompatActivity {
                     quizObjArrayList.add(quizObj);
 
                 }
-                QuizAdapter quizAdapter = new QuizAdapter(quizObjArrayList);
+                QuizAdapter quizAdapter = new QuizAdapter(quizObjArrayList, AdminQuizListActivity.this);
                 recyclerViewQuizList.setAdapter(quizAdapter);
             }
 
