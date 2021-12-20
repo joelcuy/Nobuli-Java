@@ -11,6 +11,6 @@ public class AdminNewsListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_set_news_list);
+        setContentView(R.layout.activity_admin_news_list);
     }
 }

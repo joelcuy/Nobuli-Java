@@ -77,7 +77,7 @@ public class UserDashboardActivity extends AppCompatActivity implements View.OnC
                 break;
 
             case R.id.button_news:
-                startActivity(new Intent(UserDashboardActivity.this, ReadNewsListActivity.class));
+                startActivity(new Intent(UserDashboardActivity.this, UserNewsListActivity.class));
                 break;
 
             case R.id.button_report:
