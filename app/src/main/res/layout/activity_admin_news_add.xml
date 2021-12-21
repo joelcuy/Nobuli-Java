@@ -57,7 +57,7 @@
             android:id="@+id/textView_adminNewsAdd_datePosted"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="<Today's Date>"
+            android:text="[Today's Date]"
             android:textSize="18dp" />
     </LinearLayout>
 
