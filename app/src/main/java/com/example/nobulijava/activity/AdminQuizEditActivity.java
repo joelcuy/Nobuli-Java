@@ -17,7 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AdminEditQuizActivity extends AppCompatActivity {
+public class AdminQuizEditActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     EditText editTextQuestion;
     Spinner spinnerAnswer;
@@ -26,7 +26,7 @@ public class AdminEditQuizActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_edit_quiz);
+        setContentView(R.layout.activity_admin_quiz_edit);
 
         getSupportActionBar().setTitle("Edit Quiz");
 

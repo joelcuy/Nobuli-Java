@@ -42,7 +42,7 @@ public class AdminQuizListActivity extends AppCompatActivity {
         FABAddQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AdminQuizListActivity.this, AdminAddQuizActivity.class));
+                startActivity(new Intent(AdminQuizListActivity.this, AdminQuizAddActivity.class));
             }
         });
         mDatabase.child("Quiz").addValueEventListener(new ValueEventListener() {

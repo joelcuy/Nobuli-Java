@@ -1,6 +1,5 @@
 package com.example.nobulijava.adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,10 +14,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nobulijava.R;
-import com.example.nobulijava.activity.AdminEditQuizActivity;
+import com.example.nobulijava.activity.AdminQuizEditActivity;
 import com.example.nobulijava.model.QuizObj;
-import com.google.android.material.snackbar.BaseTransientBottomBar;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -27,8 +23,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import org.apache.commons.lang3.text.WordUtils;
 
 import java.util.ArrayList;
-
-import io.opencensus.internal.Utils;
 
 public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder>{
     private ArrayList<QuizObj> quizDataSet;
@@ -89,7 +83,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
                 @Override
                 public void onClick(View v) {
                     //TODO launch update screen
-                    Intent editQuizIntent = new Intent(context, AdminEditQuizActivity.class);
+                    Intent editQuizIntent = new Intent(context, AdminQuizEditActivity.class);
                     editQuizIntent.putExtra("SelectedQuiz", quizDataSet.get(getAdapterPosition()));
                     context.startActivity(editQuizIntent);
                 }

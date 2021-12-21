@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.nobulijava.R;
 
-public class AdminAddNewsActivity extends AppCompatActivity {
+public class AdminNewsAddActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_add_news);
+        setContentView(R.layout.activity_admin_news_add);
     }
 }
