@@ -34,8 +34,8 @@ public class AdminQuizListActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle("List of Quizzes");
 
-        FABAddQuiz = findViewById(R.id.floatingActionButton_addQuiz);
-        recyclerViewQuizList = findViewById(R.id.recyclerView_quizList);
+        FABAddQuiz = findViewById(R.id.floatingActionButton_adminQuizList_addQuiz);
+        recyclerViewQuizList = findViewById(R.id.recyclerView_adminQuizList_quizList);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
