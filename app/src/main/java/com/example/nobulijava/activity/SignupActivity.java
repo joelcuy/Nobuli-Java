@@ -37,6 +37,7 @@ public class SignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+        getSupportActionBar().hide();
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 

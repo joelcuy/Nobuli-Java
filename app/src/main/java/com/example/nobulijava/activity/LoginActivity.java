@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        getSupportActionBar().hide();
 
         toSignup = findViewById(R.id.loginScreen_textView_linkSignup);
         toSignup.setOnClickListener(new View.OnClickListener() {
