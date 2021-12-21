@@ -34,7 +34,7 @@ public class AdminQuizEditActivity extends AppCompatActivity {
 
 
 
-        spinnerAnswer = (Spinner) findViewById(R.id.spinner_answer);
+        spinnerAnswer = (Spinner) findViewById(R.id.spinner_adminQuizAdd_answer);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.quizAnswer_array, android.R.layout.simple_spinner_item);
@@ -44,8 +44,8 @@ public class AdminQuizEditActivity extends AppCompatActivity {
         spinnerAnswer.setAdapter(adapter);
 
 
-        buttonSave = (Button) findViewById(R.id.button_saveQuiz);
-        editTextQuestion = (EditText) findViewById(R.id.editText_question);
+        buttonSave = (Button) findViewById(R.id.button_adminQuizAdd_saveQuiz);
+        editTextQuestion = (EditText) findViewById(R.id.editText_adminQuizAdd_question);
 
 
         //Get obj from previous activity

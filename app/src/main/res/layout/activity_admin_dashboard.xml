@@ -13,7 +13,7 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/button_setQuiz"
+            android:id="@+id/button_adminQuiz"
             android:layout_width="300dp"
             android:layout_height="70dp"
             android:layout_alignParentEnd="true"
@@ -26,15 +26,15 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/image_setQuiz"
+            android:id="@+id/image_adminQuiz"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
             android:elevation="5dp"
             android:src="@drawable/game_icon"
-            app:layout_constraintBottom_toBottomOf="@+id/button_setQuiz"
-            app:layout_constraintStart_toStartOf="@+id/button_setQuiz"
-            app:layout_constraintTop_toTopOf="@+id/button_setQuiz" />
+            app:layout_constraintBottom_toBottomOf="@+id/button_adminQuiz"
+            app:layout_constraintStart_toStartOf="@+id/button_adminQuiz"
+            app:layout_constraintTop_toTopOf="@+id/button_adminQuiz" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/button_setNews"
+            android:id="@+id/button_adminNews"
             android:layout_width="300dp"
             android:layout_height="70dp"
             android:layout_alignParentEnd="true"
@@ -55,15 +55,15 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/image_setNews"
+            android:id="@+id/image_adminNews"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginEnd="16dp"
             android:elevation="5dp"
             android:src="@drawable/news_icon"
-            app:layout_constraintBottom_toBottomOf="@+id/button_setNews"
-            app:layout_constraintEnd_toEndOf="@+id/button_setNews"
-            app:layout_constraintTop_toTopOf="@+id/button_setNews" />
+            app:layout_constraintBottom_toBottomOf="@+id/button_adminNews"
+            app:layout_constraintEnd_toEndOf="@+id/button_adminNews"
+            app:layout_constraintTop_toTopOf="@+id/button_adminNews" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

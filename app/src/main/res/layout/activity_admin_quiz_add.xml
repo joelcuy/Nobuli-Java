@@ -8,14 +8,14 @@
     tools:context=".activity.AdminQuizAddActivity">
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/textView_adminQuizAdd_textQuestion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Question: "
         android:textSize="18dp" />
 
     <EditText
-        android:id="@+id/editText_question"
+        android:id="@+id/editText_adminQuizAdd_question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter question"
@@ -26,25 +26,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textView_adminQuizAdd_textAnswer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Answer: "
             android:textSize="18dp" />
 
         <Spinner
-            android:id="@+id/spinner_answer"
+            android:id="@+id/spinner_adminQuizAdd_answer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="0dp" />
     </LinearLayout>
 
     <Button
-        android:id="@+id/button_saveQuiz"
+        android:id="@+id/button_adminQuizAdd_saveQuiz"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"

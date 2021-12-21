@@ -8,7 +8,7 @@
     android:id="@+id/layout_notes">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_quizList"
+        android:id="@+id/recyclerView_adminQuizList_quizList"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton_addQuiz"
+        android:id="@+id/floatingActionButton_adminQuizList_addQuiz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

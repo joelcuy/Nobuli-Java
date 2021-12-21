@@ -24,8 +24,8 @@ public class AdminDashboardActivity extends AppCompatActivity{
 
         getSupportActionBar().setTitle("Admin Dashboard");
 
-        buttonSetQuiz = findViewById(R.id.button_setQuiz);
-        buttonSetNews =  findViewById(R.id.button_setNews);
+        buttonSetQuiz = findViewById(R.id.button_adminQuiz);
+        buttonSetNews =  findViewById(R.id.button_adminNews);
 
         buttonSetQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
