@@ -1,6 +1,8 @@
 package com.example.nobulijava.model;
 
-public class NewsObj {
+import java.io.Serializable;
+
+public class NewsObj implements Serializable {
     private String title;
     private String content;
     private String datePosted;
