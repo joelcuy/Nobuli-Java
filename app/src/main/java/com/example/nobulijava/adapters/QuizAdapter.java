@@ -42,9 +42,9 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
     // Create new views (invoked by the layout manager
     @NonNull
     @Override
-    public QuizViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+    public QuizViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Create a new view, which defines the UI of the list item
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.template_quiz, viewGroup, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.template_quiz, parent, false);
 
         return new QuizViewHolder(view);
     }
@@ -71,15 +71,15 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
         private final TextView textViewQuestion;
         private final TextView textViewAnswer;
 
-        public QuizViewHolder(View view) {
-            super(view);
+        public QuizViewHolder(@NonNull View itemView) {
+            super(itemView);
             // Define click listener for the ViewHolder's View
 
-            textViewQuizNo = (TextView) view.findViewById(R.id.textView_quizList_quizNo);
-            textViewQuestion = (TextView) view.findViewById(R.id.textView_quizList_question);
-            textViewAnswer = (TextView) view.findViewById(R.id.textView_quizList_answer);
+            textViewQuizNo = (TextView) itemView.findViewById(R.id.textView_quizList_quizNo);
+            textViewQuestion = (TextView) itemView.findViewById(R.id.textView_quizList_question);
+            textViewAnswer = (TextView) itemView.findViewById(R.id.textView_quizList_answer);
 
-            view.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //TODO launch update screen
@@ -89,10 +89,10 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
                 }
             });
 
-            view.setOnLongClickListener(new View.OnLongClickListener() {
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    AlertDialog.Builder alert = new AlertDialog.Builder(view.getContext());
+                    AlertDialog.Builder alert = new AlertDialog.Builder(context);
                     alert.setTitle("Delete");
                     alert.setMessage("Do you wanna delete this item?");
                     alert.setCancelable(true);
