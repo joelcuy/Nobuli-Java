@@ -13,7 +13,11 @@
         android:theme="@style/Theme.NobuliJava" >
         <activity
             android:name=".activity.AdminNewsEditActivity"
-            android:exported="false" />
+            android:exported="false" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nobulijava.activity.AdminNewsListActivity" />
+        </activity>
         <activity
             android:name=".activity.AdminQuizEditActivity"
             android:exported="false" >

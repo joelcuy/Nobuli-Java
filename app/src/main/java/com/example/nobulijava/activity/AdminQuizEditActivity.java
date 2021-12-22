@@ -19,9 +19,9 @@ import java.util.Map;
 
 public class AdminQuizEditActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
-    EditText editTextQuestion;
-    Spinner spinnerAnswer;
-    Button buttonSave;
+    private EditText editTextQuestion;
+    private Spinner spinnerAnswer;
+    private Button buttonSave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
