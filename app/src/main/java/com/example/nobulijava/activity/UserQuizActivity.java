@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,15 +14,17 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.nobulijava.R;
 import com.example.nobulijava.model.QuizObj;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -35,14 +38,16 @@ public class UserQuizActivity extends AppCompatActivity implements View.OnClickL
     private Button buttonMainMenu;
     private RadioGroup radioGroupAnswer;
     private TextView textViewQuestion;
-    private ImageView imageQuizImage;
+    private ImageView imageViewQuiz;
 
     private DatabaseReference mDatabase;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
 
     private ArrayList<QuizObj> quizObjArrayList = new ArrayList<>();
     private ArrayList<Integer> scoreArrayList = new ArrayList<>();
     private Integer currentQuestionIndex = 0;
     private Integer score = 0;
+    private String FOLDER_NAME = "quiz_image";
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -52,6 +57,8 @@ public class UserQuizActivity extends AppCompatActivity implements View.OnClickL
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        getSupportActionBar().setTitle("Quizzes");
 
         // setting up the buttons
         // associated with id
@@ -63,7 +70,7 @@ public class UserQuizActivity extends AppCompatActivity implements View.OnClickL
         buttonMainMenu = findViewById(R.id.button_mainMenu);
         radioGroupAnswer = findViewById(R.id.radioGroup_answer);
         textViewQuestion = findViewById(R.id.textView_takeQuiz_question);
-        imageQuizImage = findViewById(R.id.image_quizImage);
+        imageViewQuiz = findViewById(R.id.image_quizImage);
 
         radioFalse.setOnClickListener(this);
         radioTrue.setOnClickListener(this);
@@ -80,10 +87,18 @@ public class UserQuizActivity extends AppCompatActivity implements View.OnClickL
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 for (DataSnapshot quizSnapshot: task.getResult().getChildren()) {
                     QuizObj quizObj = quizSnapshot.getValue(QuizObj.class);
+                    quizObj.setQuizID(quizSnapshot.getKey());
                     quizObjArrayList.add(quizObj);
                     scoreArrayList.add(0);
                 }
                 textViewQuestion.setText(quizObjArrayList.get(0).getQuestion());
+                StorageReference gsReference = storage.getReferenceFromUrl("gs://nobulibot-ysta.appspot.com/" + FOLDER_NAME + "/" + quizObjArrayList.get(0).getQuizID());
+                gsReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Glide.with(UserQuizActivity.this).load(uri).into(imageViewQuiz);
+                    }
+                });
             }
         });
 
@@ -157,6 +172,15 @@ public class UserQuizActivity extends AppCompatActivity implements View.OnClickL
         if (currentQuestionIndex < quizObjArrayList.size()) {
             radioGroupAnswer.clearCheck();
             textViewQuestion.setText(quizObjArrayList.get(currentQuestionIndex).getQuestion());
+
+            StorageReference gsReference = storage.getReferenceFromUrl("gs://nobulibot-ysta.appspot.com/" + FOLDER_NAME + "/" + quizObjArrayList.get(currentQuestionIndex).getQuizID());
+            gsReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    Glide.with(UserQuizActivity.this).load(uri).into(imageViewQuiz);
+                }
+            });
+
         } else {
             calcScore();
             textViewQuestion.setText(getString(R.string.score) + " " + score.toString());
@@ -165,7 +189,7 @@ public class UserQuizActivity extends AppCompatActivity implements View.OnClickL
             buttonPrevious.setVisibility(View.GONE);
             radioTrue.setVisibility(View.GONE);
             radioFalse.setVisibility(View.GONE);
-            imageQuizImage.setVisibility(View.GONE);
+            imageViewQuiz.setVisibility(View.GONE);
             buttonTryAgain.setVisibility(View.VISIBLE);
             buttonMainMenu.setVisibility(View.VISIBLE);
         }
