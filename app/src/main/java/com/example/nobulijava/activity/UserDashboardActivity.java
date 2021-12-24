@@ -21,6 +21,8 @@ public class UserDashboardActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_dashboard);
 
+        getSupportActionBar().setTitle("User Dashboard");
+
 
         Button buttonAbout = findViewById(R.id.button_aboutCyberbully);
         Button buttonChatBot = findViewById(R.id.button_chatBot);

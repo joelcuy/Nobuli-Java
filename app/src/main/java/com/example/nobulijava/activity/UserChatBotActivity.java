@@ -51,6 +51,8 @@ public class UserChatBotActivity extends AppCompatActivity implements BotReply {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_chatbot);
 
+        getSupportActionBar().setTitle("Nobuli Chatbot");
+
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         chatView = findViewById(R.id.chatRecyclerView);

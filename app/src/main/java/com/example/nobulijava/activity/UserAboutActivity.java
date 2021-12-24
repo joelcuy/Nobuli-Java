@@ -12,5 +12,7 @@ public class UserAboutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_about);
+
+        getSupportActionBar().setTitle("About Cyberbullying");
     }
 }
