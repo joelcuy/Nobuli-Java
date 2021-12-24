@@ -57,6 +57,7 @@ public class AdminQuizListActivity extends AppCompatActivity {
                 }
                 QuizAdapter quizAdapter = new QuizAdapter(quizObjArrayList, AdminQuizListActivity.this);
                 recyclerViewQuizList.setAdapter(quizAdapter);
+                //TODO when delete item, recyclerview scrolls back to top
             }
 
             @Override
