@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="red_200">#FC8686</color>
-    <color name="red_500">#EE0000</color>
-    <color name="red_700">#B30000</color>
+    <color name="red_200">#FFBA53</color>
+    <color name="red_500">#FF9800</color>
+    <color name="red_700">#FF5722</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
@@ -11,4 +11,5 @@
     <color name="colorGray">#dedede</color>
     <color name="colorDarkGray">#b4b4b4</color>
     <color name="colorBlue">#2962FF</color>
+    <color name="transparent">#00FF2929</color>
 </resources>
