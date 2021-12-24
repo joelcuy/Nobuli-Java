@@ -1,5 +1,6 @@
 package com.example.nobulijava.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,6 +11,8 @@ import android.view.View;
 import com.example.nobulijava.R;
 import com.example.nobulijava.adapters.QuizAdapter;
 import com.example.nobulijava.model.QuizObj;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,6 +30,8 @@ public class AdminQuizListActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
 
     private ArrayList<QuizObj> quizObjArrayList;
+    QuizAdapter quizAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,34 +50,26 @@ public class AdminQuizListActivity extends AppCompatActivity {
                 startActivity(new Intent(AdminQuizListActivity.this, AdminQuizAddActivity.class));
             }
         });
+
+        quizObjArrayList = new ArrayList<>();
+        quizAdapter = new QuizAdapter(quizObjArrayList, AdminQuizListActivity.this);
+        recyclerViewQuizList.setAdapter(quizAdapter);
+
         mDatabase.child("Quiz").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                quizObjArrayList = new ArrayList<>();
-                for (DataSnapshot quizSnapshot: dataSnapshot.getChildren()) {
+                quizObjArrayList.clear();
+                for (DataSnapshot quizSnapshot : dataSnapshot.getChildren()) {
                     QuizObj quizObj = quizSnapshot.getValue(QuizObj.class);
                     quizObj.setQuizID(quizSnapshot.getKey());
                     quizObjArrayList.add(quizObj);
-
                 }
-                QuizAdapter quizAdapter = new QuizAdapter(quizObjArrayList, AdminQuizListActivity.this);
-                recyclerViewQuizList.setAdapter(quizAdapter);
-                //TODO when delete item, recyclerview scrolls back to top
+                quizAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-
-
-
-
-
-
-
-
     }
-
-
 }
