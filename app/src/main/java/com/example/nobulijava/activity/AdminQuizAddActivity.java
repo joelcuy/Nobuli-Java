@@ -6,7 +6,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Instrumentation;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -35,7 +34,7 @@ public class AdminQuizAddActivity extends AppCompatActivity {
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     ImageView imageViewQuiz;
     ProgressBar progressBar;
-    String IMAGE_NAME = "quiz_image";
+    String FOLDER_NAME = "quiz_image";
     FirebaseStorage storage = FirebaseStorage.getInstance();
     Uri uriSelectedImage;
     EditText editTextQuestion;
@@ -50,9 +49,6 @@ public class AdminQuizAddActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle("Add Quiz");
         findView();
-
-//        StorageReference gsReference = storage.getReferenceFromUrl("gs://nobulibot-ysta.appspot.com/" + ID / imagename);
-
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -77,35 +73,7 @@ public class AdminQuizAddActivity extends AppCompatActivity {
                 pushedQuizRef.setValue(newQuiz).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        StorageReference quizStorageReference = storage.getReference(IMAGE_NAME).child(quizID);
-                        if (uriSelectedImage != null) {
-                            System.out.println("nice");
-                            progressBar.setVisibility(View.VISIBLE);
-                            quizStorageReference.putFile(uriSelectedImage)
-                                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                        @Override
-                                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                                        }
-                                    })
-                                    .addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-
-                                        }
-                                    })
-                                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                                        @Override
-                                        public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                                            double progress= 100 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount();
-                                            progressBar.setProgress((int) progress);
-                                        }
-                                    });
-                        }else{
-                            Toast.makeText(AdminQuizAddActivity.this, "Please click on photo to select image", Toast.LENGTH_LONG).show();
-                            System.out.println("fuck");
-                        }
-
+                        putImageInStorage(quizID);
                     }
                 });
                 finish();
@@ -141,7 +109,33 @@ public class AdminQuizAddActivity extends AppCompatActivity {
         uriSelectedImage = uri;
     }
 
-    public void putImageInStorage(StorageReference storageReference, Uri uri, String key) {
+    public void putImageInStorage(String quizID) {
+        StorageReference quizStorageReference = storage.getReference(FOLDER_NAME).child(quizID);
+        if (uriSelectedImage != null) {
+            progressBar.setVisibility(View.VISIBLE);
+            quizStorageReference.putFile(uriSelectedImage)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                            double progress = 100 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount();
+                            progressBar.setProgress((int) progress);
+                        }
+                    });
+        } else {
+            Toast.makeText(AdminQuizAddActivity.this, "Please click on photo to select image", Toast.LENGTH_LONG).show();
+            System.out.println("fuck");
+        }
     }
 }
