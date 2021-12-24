@@ -7,10 +7,29 @@
     android:padding="16dp"
     tools:context=".activity.AdminQuizAddActivity">
 
+    <ImageView
+        android:id="@+id/imageView_adminQuizAdd_imageUpload"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/colorGray"
+        android:src="@drawable/outline_add_photo" />
+
+    <ProgressBar
+        android:id="@+id/progressBar_adminQuizAdd_uploadProgress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:indeterminate="false"
+        android:visibility="gone"
+        android:min="0"
+        android:max="0"
+        android:progress="1"/>
+
     <TextView
         android:id="@+id/textView_adminQuizAdd_textQuestion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="Question: "
         android:textSize="18dp" />
 
