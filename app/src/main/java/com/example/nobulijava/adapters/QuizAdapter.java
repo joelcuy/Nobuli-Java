@@ -3,9 +3,11 @@ package com.example.nobulijava.adapters;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,12 +15,16 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.nobulijava.R;
 import com.example.nobulijava.activity.AdminQuizEditActivity;
 import com.example.nobulijava.model.QuizObj;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import org.apache.commons.lang3.text.WordUtils;
 
@@ -70,6 +76,11 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
         private final TextView textViewQuizNo;
         private final TextView textViewQuestion;
         private final TextView textViewAnswer;
+        private final ImageView imageViewQuiz;
+
+        String FOLDER_NAME = "quiz_image";
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        Uri uriSelectedImage;
 
         public QuizViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -78,6 +89,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
             textViewQuizNo = (TextView) itemView.findViewById(R.id.textView_quizList_quizNo);
             textViewQuestion = (TextView) itemView.findViewById(R.id.textView_quizList_question);
             textViewAnswer = (TextView) itemView.findViewById(R.id.textView_quizList_answer);
+            imageViewQuiz = (ImageView) itemView.findViewById(R.id.imageView_quizList_image);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -129,6 +141,14 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
             textViewQuizNo.setText(quizNo.toString());
             textViewQuestion.setText(quizObj.getQuestion());
             textViewAnswer.setText(WordUtils.capitalizeFully(quizObj.getAnswer().toString()));
+
+            StorageReference gsReference = storage.getReferenceFromUrl("gs://nobulibot-ysta.appspot.com/" + FOLDER_NAME + "/" + quizObj.getQuizID());
+            gsReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    Glide.with(context).load(uri).into(imageViewQuiz);
+                }
+            });
         }
     }
 }

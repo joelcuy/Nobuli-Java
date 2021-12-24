@@ -55,6 +55,12 @@ public class AdminQuizListActivity extends AppCompatActivity {
         quizAdapter = new QuizAdapter(quizObjArrayList, AdminQuizListActivity.this);
         recyclerViewQuizList.setAdapter(quizAdapter);
 
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         mDatabase.child("Quiz").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

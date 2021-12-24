@@ -93,6 +93,7 @@ public class AdminQuizEditActivity extends AppCompatActivity {
                     @Override
                     public void onActivityResult(Uri uri) {
                         onImageSelected(uri);
+                        putImageInStorage(selectedQuiz.getQuizID());
                     }
                 });
 
@@ -113,7 +114,7 @@ public class AdminQuizEditActivity extends AppCompatActivity {
                 childUpdates.put("question", questionString);
                 childUpdates.put("answer", answerBoolean);
                 mDatabase.child("Quiz").child(selectedQuiz.getQuizID()).updateChildren(childUpdates);
-                putImageInStorage(selectedQuiz.getQuizID());
+
                 finish();
             }
         });
