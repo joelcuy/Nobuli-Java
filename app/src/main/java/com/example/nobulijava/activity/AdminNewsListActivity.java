@@ -47,7 +47,11 @@ public class AdminNewsListActivity extends AppCompatActivity {
                 startActivity(new Intent(AdminNewsListActivity.this, AdminNewsAddActivity.class));
             }
         });
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
         mDatabase.child("News").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
