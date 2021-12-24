@@ -69,10 +69,14 @@ public class AdminNewsAddActivity extends AppCompatActivity {
                 NewsObj newNews = new NewsObj(titleString, contentString, datePostedString);
                 DatabaseReference pushedNewsRef = mDatabase.child("News").push();
                 String newsID = pushedNewsRef.getKey();
+
+                String imageLocation = "gs://nobulibot-ysta.appspot.com/" + FOLDER_NAME + "/" + newNews.getNewsID();
                 pushedNewsRef.setValue(newNews).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         putImageInStorage(newsID);
+
+                        pushedNewsRef.child("imageLocation").setValue(imageLocation);
                     }
                 });
                 finish();

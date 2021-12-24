@@ -1,5 +1,6 @@
 package com.example.nobulijava.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.nobulijava.R;
 import com.example.nobulijava.activity.AdminNewsEditActivity;
+import com.example.nobulijava.activity.AdminNewsListActivity;
 import com.example.nobulijava.activity.AdminQuizEditActivity;
 import com.example.nobulijava.model.NewsObj;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,9 +34,9 @@ import java.util.ArrayList;
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder>{
     private ArrayList<NewsObj> newsDataSet;
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-    private final Context context;
+    private final Activity context;
 
-    public NewsAdapter(ArrayList<NewsObj> newsDataSet, Context context) {
+    public NewsAdapter(ArrayList<NewsObj> newsDataSet, Activity context) {
         this.newsDataSet = newsDataSet;
         this.context = context;
     }
@@ -122,7 +124,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
         public void bind(NewsObj newsObj, Integer position){
             textViewTitle.setText(newsObj.getTitle());
-            textViewContent.setText(newsObj.getContent().substring(0, 105) + "...");
+            if (newsObj.getContent().length() > 105){
+                textViewContent.setText(newsObj.getContent().substring(0, 105) + "...");
+            } else{
+                textViewContent.setText(newsObj.getContent());
+            }
             textViewDatePosted.setText(newsObj.getDatePosted());
 
             StorageReference gsReference = storage.getReferenceFromUrl("gs://nobulibot-ysta.appspot.com/" + FOLDER_NAME + "/" + newsObj.getNewsID());

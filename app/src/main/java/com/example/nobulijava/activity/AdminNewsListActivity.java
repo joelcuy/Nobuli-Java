@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 public class AdminNewsListActivity extends AppCompatActivity {
     private FloatingActionButton FABAddNews;
-    private RecyclerView recyclerViewNewsList;
+    public static RecyclerView recyclerViewNewsList;
 
     private DatabaseReference mDatabase;
 
@@ -47,14 +47,17 @@ public class AdminNewsListActivity extends AppCompatActivity {
                 startActivity(new Intent(AdminNewsListActivity.this, AdminNewsAddActivity.class));
             }
         });
+
+
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onResume() {
+        super.onResume();
         mDatabase.child("News").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                System.out.println("Data changed");
                 newsObjArrayList = new ArrayList<>();
                 for (DataSnapshot quizSnapshot: dataSnapshot.getChildren()) {
                     NewsObj newsObj = quizSnapshot.getValue(NewsObj.class);
