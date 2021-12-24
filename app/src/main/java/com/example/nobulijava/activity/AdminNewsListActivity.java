@@ -24,11 +24,12 @@ import java.util.ArrayList;
 
 public class AdminNewsListActivity extends AppCompatActivity {
     private FloatingActionButton FABAddNews;
-    public static RecyclerView recyclerViewNewsList;
+    private RecyclerView recyclerViewNewsList;
 
     private DatabaseReference mDatabase;
 
     private ArrayList<NewsObj> newsObjArrayList;
+    NewsAdapter newsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +48,9 @@ public class AdminNewsListActivity extends AppCompatActivity {
                 startActivity(new Intent(AdminNewsListActivity.this, AdminNewsAddActivity.class));
             }
         });
-
-
+        newsObjArrayList = new ArrayList<>();
+        newsAdapter = new NewsAdapter(newsObjArrayList, AdminNewsListActivity.this);
+        recyclerViewNewsList.setAdapter(newsAdapter);
     }
 
     @Override
@@ -57,16 +59,13 @@ public class AdminNewsListActivity extends AppCompatActivity {
         mDatabase.child("News").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                System.out.println("Data changed");
-                newsObjArrayList = new ArrayList<>();
-                for (DataSnapshot quizSnapshot: dataSnapshot.getChildren()) {
+                newsObjArrayList.clear();
+                for (DataSnapshot quizSnapshot : dataSnapshot.getChildren()) {
                     NewsObj newsObj = quizSnapshot.getValue(NewsObj.class);
                     newsObj.setNewsID(quizSnapshot.getKey());
                     newsObjArrayList.add(newsObj);
-
                 }
-                NewsAdapter newsAdapter = new NewsAdapter(newsObjArrayList, AdminNewsListActivity.this);
-                recyclerViewNewsList.setAdapter(newsAdapter);
+                newsAdapter.notifyDataSetChanged();
             }
 
             @Override

@@ -24,6 +24,7 @@ public class UserNewsListActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
 
     private ArrayList<NewsObj> newsObjArrayList;
+    NewsAdapter newsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,9 @@ public class UserNewsListActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         recyclerViewNewsList = findViewById(R.id.recyclerView_newsList);
+                newsObjArrayList = new ArrayList<>();
+                newsAdapter = new NewsAdapter(newsObjArrayList, UserNewsListActivity.this);
+                recyclerViewNewsList.setAdapter(newsAdapter);
     }
 
     @Override
@@ -42,15 +46,14 @@ public class UserNewsListActivity extends AppCompatActivity {
         mDatabase.child("News").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                newsObjArrayList = new ArrayList<>();
+                newsObjArrayList.clear();
                 for (DataSnapshot quizSnapshot: dataSnapshot.getChildren()) {
                     NewsObj newsObj = quizSnapshot.getValue(NewsObj.class);
                     newsObj.setNewsID(quizSnapshot.getKey());
                     newsObjArrayList.add(newsObj);
 
                 }
-                NewsAdapter newsAdapter = new NewsAdapter(newsObjArrayList, UserNewsListActivity.this);
-                recyclerViewNewsList.setAdapter(newsAdapter);
+                newsAdapter.notifyDataSetChanged();
             }
 
             @Override
