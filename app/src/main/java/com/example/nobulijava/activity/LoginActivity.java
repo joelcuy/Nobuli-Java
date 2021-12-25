@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText editTextPassword;
 
     public static FirebaseAuth mAuth;
-    private DatabaseReference mDatabase;
+    private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     private UserObj user;
 
     @Override
@@ -79,7 +79,8 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
         if (currentUser != null) {
-            ValueEventListener userListener = new ValueEventListener() {
+
+            mDatabase.child("User").child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     // Get Post object and use the values to update the UI
@@ -96,9 +97,9 @@ public class LoginActivity extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            };
-            mDatabase = FirebaseDatabase.getInstance().getReference();
-            mDatabase.child("User").child(currentUser.getUid()).addValueEventListener(userListener);
+            });
+
+
         }
     }
 
