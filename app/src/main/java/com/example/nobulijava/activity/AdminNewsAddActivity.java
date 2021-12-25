@@ -63,7 +63,7 @@ public class AdminNewsAddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String titleString = editTextTitle.getText().toString();
-                String contentString = editTextContent.getText().toString();
+                String contentString = editTextContent.getText().toString().trim() + "\n";
                 String datePostedString = textViewDatePosted.getText().toString();
 
                 NewsObj newNews = new NewsObj(titleString, contentString, datePostedString);

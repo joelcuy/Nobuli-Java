@@ -94,7 +94,7 @@ public class AdminNewsEditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String titleString = editTextTitle.getText().toString();
-                String contentString = editTextContent.getText().toString();
+                String contentString = editTextContent.getText().toString().trim() + "\n";
 
                 Map<String, Object> childUpdates = new HashMap<>();
                 childUpdates.put("title", titleString);
