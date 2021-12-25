@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.nobulijava" >
+    package="com.example.nobulijava">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -10,24 +10,38 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.NobuliJava" >
+        android:theme="@style/Theme.NobuliJava">
+        <activity
+            android:name=".activity.AdminAboutEditActivity"
+            android:exported="false" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nobulijava.activity.AdminDashboardActivity" />
+        </activity>
+        <activity
+            android:name=".activity.AdminReportEditActivity"
+            android:exported="false" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nobulijava.activity.AdminDashboardActivity" />
+        </activity>
         <activity
             android:name=".activity.AdminNewsEditActivity"
-            android:exported="false" >
+            android:exported="false">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.nobulijava.activity.AdminNewsListActivity" />
         </activity>
         <activity
             android:name=".activity.AdminQuizEditActivity"
-            android:exported="false" >
+            android:exported="false">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.nobulijava.activity.AdminQuizListActivity" />
         </activity>
         <activity
             android:name=".activity.AdminNewsAddActivity"
-            android:exported="false" >
+            android:exported="false">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.nobulijava.activity.AdminNewsListActivity" />
@@ -37,21 +51,21 @@
             android:exported="false" />
         <activity
             android:name=".activity.AdminNewsListActivity"
-            android:exported="false" >
+            android:exported="false">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.nobulijava.activity.AdminDashboardActivity" />
         </activity>
         <activity
             android:name=".activity.AdminQuizListActivity"
-            android:exported="false" >
+            android:exported="false">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.nobulijava.activity.AdminDashboardActivity" />
         </activity>
         <activity
             android:name=".activity.AdminQuizAddActivity"
-            android:exported="false" >
+            android:exported="false">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.nobulijava.activity.AdminQuizListActivity" />
@@ -61,42 +75,42 @@
             android:exported="false" />
         <activity
             android:name=".activity.UserNewsDetailsActivity"
-            android:exported="false" >
+            android:exported="false">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.nobulijava.activity.UserNewsListActivity" />
         </activity>
         <activity
             android:name=".activity.UserAboutActivity"
-            android:exported="false" >
+            android:exported="false">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.nobulijava.activity.UserDashboardActivity" />
         </activity>
         <activity
             android:name=".activity.UserChatBotActivity"
-            android:exported="false" >
+            android:exported="false">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.nobulijava.activity.UserDashboardActivity" />
         </activity>
         <activity
             android:name=".activity.UserQuizActivity"
-            android:exported="false" >
+            android:exported="false">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.nobulijava.activity.UserDashboardActivity" />
         </activity>
         <activity
             android:name=".activity.UserNewsListActivity"
-            android:exported="false" >
+            android:exported="false">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.nobulijava.activity.UserDashboardActivity" />
         </activity>
         <activity
             android:name=".activity.UserReportActivity"
-            android:exported="false" >
+            android:exported="false">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.nobulijava.activity.UserDashboardActivity" />
@@ -106,7 +120,7 @@
             android:exported="false" />
         <activity
             android:name=".activity.LoginActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

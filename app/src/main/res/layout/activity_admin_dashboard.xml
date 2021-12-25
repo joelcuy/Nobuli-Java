@@ -13,6 +13,35 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:id="@+id/button_adminAbout"
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:text="Set About Cyberbullying"
+            android:textAlignment="textStart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/image_adminAbout"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:elevation="5dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/info_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/button_adminAbout"
+            app:layout_constraintEnd_toEndOf="@+id/button_adminAbout"
+            app:layout_constraintTop_toTopOf="@+id/button_adminAbout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
             android:id="@+id/button_adminQuiz"
             android:layout_width="300dp"
             android:layout_height="70dp"
@@ -64,6 +93,35 @@
             app:layout_constraintBottom_toBottomOf="@+id/button_adminNews"
             app:layout_constraintEnd_toEndOf="@+id/button_adminNews"
             app:layout_constraintTop_toTopOf="@+id/button_adminNews" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/button_adminReport"
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:text="Set Report"
+            android:textAlignment="textEnd"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/image_adminReport"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:elevation="5dp"
+            android:src="@drawable/warning_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/button_adminReport"
+            app:layout_constraintStart_toStartOf="@+id/button_adminReport"
+            app:layout_constraintTop_toTopOf="@+id/button_adminReport" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
