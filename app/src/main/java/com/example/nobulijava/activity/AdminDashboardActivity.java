@@ -15,8 +15,10 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class AdminDashboardActivity extends AppCompatActivity{
 
+    Button buttonSetAbout;
     Button buttonSetQuiz;
     Button buttonSetNews;
+    Button buttonSetReport;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,8 +26,17 @@ public class AdminDashboardActivity extends AppCompatActivity{
 
         getSupportActionBar().setTitle("Admin Dashboard");
 
+        buttonSetAbout = findViewById(R.id.button_adminAbout);
         buttonSetQuiz = findViewById(R.id.button_adminQuiz);
         buttonSetNews =  findViewById(R.id.button_adminNews);
+        buttonSetReport =  findViewById(R.id.button_adminReport);
+
+        buttonSetAbout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AdminDashboardActivity.this, AdminAboutEditActivity.class));
+            }
+        });
 
         buttonSetQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +49,13 @@ public class AdminDashboardActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(AdminDashboardActivity.this, AdminNewsListActivity.class));
+            }
+        });
+
+        buttonSetReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AdminDashboardActivity.this, AdminReportEditActivity.class));
             }
         });
     }
