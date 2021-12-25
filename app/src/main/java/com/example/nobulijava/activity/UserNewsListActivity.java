@@ -3,9 +3,7 @@ package com.example.nobulijava.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import com.example.nobulijava.R;
 import com.example.nobulijava.adapters.NewsAdapter;
@@ -24,6 +22,7 @@ public class UserNewsListActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
 
     private ArrayList<NewsObj> newsObjArrayList;
+    private ArrayList<NewsObj> reverseNewsObjArrayList;
     NewsAdapter newsAdapter;
 
     @Override
@@ -35,9 +34,12 @@ public class UserNewsListActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         recyclerViewNewsList = findViewById(R.id.recyclerView_newsList);
-                newsObjArrayList = new ArrayList<>();
-                newsAdapter = new NewsAdapter(newsObjArrayList, UserNewsListActivity.this);
-                recyclerViewNewsList.setAdapter(newsAdapter);
+        newsObjArrayList = new ArrayList<>();
+
+        //News feed should be sorted to newest first, which is opposite of Firebase Storage
+        reverseNewsObjArrayList = new ArrayList<>();
+        newsAdapter = new NewsAdapter(reverseNewsObjArrayList, UserNewsListActivity.this);
+        recyclerViewNewsList.setAdapter(newsAdapter);
     }
 
     @Override
@@ -47,11 +49,16 @@ public class UserNewsListActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 newsObjArrayList.clear();
-                for (DataSnapshot quizSnapshot: dataSnapshot.getChildren()) {
+                reverseNewsObjArrayList.clear();
+                for (DataSnapshot quizSnapshot : dataSnapshot.getChildren()) {
                     NewsObj newsObj = quizSnapshot.getValue(NewsObj.class);
                     newsObj.setNewsID(quizSnapshot.getKey());
                     newsObjArrayList.add(newsObj);
 
+                }
+                for (int i = newsObjArrayList.size() - 1; i >= 0; i--) {
+                    // Append the elements in reverse order
+                    reverseNewsObjArrayList.add(newsObjArrayList.get(i));
                 }
                 newsAdapter.notifyDataSetChanged();
             }
