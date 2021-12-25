@@ -1,7 +1,6 @@
 package com.example.nobulijava.adapters;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -18,15 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.nobulijava.R;
-import com.example.nobulijava.activity.AdminDashboardActivity;
 import com.example.nobulijava.activity.AdminNewsEditActivity;
-import com.example.nobulijava.activity.AdminNewsListActivity;
-import com.example.nobulijava.activity.AdminQuizEditActivity;
 import com.example.nobulijava.activity.LoginActivity;
-import com.example.nobulijava.activity.UserDashboardActivity;
 import com.example.nobulijava.activity.UserNewsDetailsActivity;
 import com.example.nobulijava.model.NewsObj;
 import com.example.nobulijava.model.UserObj;
+import com.example.nobulijava.utils.DateTimeCalculator;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -37,9 +33,17 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.Year;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
-public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder>{
+import com.example.nobulijava.utils.DateTimeCalculator;
+
+public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
     private ArrayList<NewsObj> newsDataSet;
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     private final Activity context;
@@ -67,7 +71,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         return newsDataSet.size();
     }
 
-    public class NewsViewHolder extends RecyclerView.ViewHolder{
+    public class NewsViewHolder extends RecyclerView.ViewHolder {
         private final TextView textViewTitle;
         private final TextView textViewContent;
         private final TextView textViewDatePosted;
@@ -75,7 +79,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
         String FOLDER_NAME = "news_image";
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        Uri uriSelectedImage;
+        FirebaseUser firebaseCurrentUser = LoginActivity.mAuth.getCurrentUser();
+        UserObj currentUserObj;
 
         public NewsViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -85,12 +90,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
             textViewDatePosted = (TextView) itemView.findViewById(R.id.textView_newsList_datePosted);
             imageViewNews = (ImageView) itemView.findViewById(R.id.imageView_newsList_image);
 
-            FirebaseUser currentUser = LoginActivity.mAuth.getCurrentUser();
-            mDatabase.child("User").child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
+            mDatabase.child("User").child(firebaseCurrentUser.getUid()).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                   UserObj user = dataSnapshot.getValue(UserObj.class);
-                    if (user.getIsAdmin()) {
+                    currentUserObj = dataSnapshot.getValue(UserObj.class);
+                    if (currentUserObj.getIsAdmin()) {
                         itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -156,22 +160,49 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
         }
 
-        public void bind(NewsObj newsObj, Integer position){
+        public void bind(NewsObj newsObj, Integer position) {
             textViewTitle.setText(newsObj.getTitle());
-            if (newsObj.getContent().length() > 105){
+            if (newsObj.getContent().length() > 105) {
                 textViewContent.setText(newsObj.getContent().substring(0, 105) + "...");
-            } else{
+            } else {
                 textViewContent.setText(newsObj.getContent());
             }
-            textViewDatePosted.setText(newsObj.getDatePosted());
 
-            StorageReference gsReference = storage.getReferenceFromUrl("gs://nobulibot-ysta.appspot.com/" + FOLDER_NAME + "/" + newsObj.getNewsID());
-            gsReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            mDatabase.child("User").child(firebaseCurrentUser.getUid()).addValueEventListener(new ValueEventListener() {
                 @Override
-                public void onSuccess(Uri uri) {
-                    Glide.with(context).load(uri).into(imageViewNews);
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    currentUserObj = dataSnapshot.getValue(UserObj.class);
+                    if (currentUserObj.getIsAdmin()) {
+                        textViewDatePosted.setText(newsObj.getDatePosted());
+                    } else {
+                        String[] simpleDurationDetails = DateTimeCalculator.simpleDuration(newsObj.getDatePosted());
+                        String toPrint = "";
+                        for (String string: simpleDurationDetails){
+                            toPrint += " " + string;
+                        }
+                        textViewDatePosted.setText(toPrint + " Ago");
+
+                        System.out.println("Simple duration: " + toPrint);
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
                 }
             });
+
+
+            StorageReference gsReference = storage.getReferenceFromUrl("gs://nobulibot-ysta.appspot.com/" + FOLDER_NAME + "/" + newsObj.getNewsID());
+            gsReference.getDownloadUrl().
+
+                    addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            Glide.with(context).load(uri).into(imageViewNews);
+                        }
+                    });
         }
     }
 }
