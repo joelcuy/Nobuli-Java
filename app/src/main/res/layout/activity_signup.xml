@@ -6,16 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".activity.SignupActivity">
 
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:scaleType="centerCrop"
+        android:layout_height="match_parent"
+        android:scaleType="fitStart"
         android:src="@drawable/login_signup_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/signupScreen_textview_signup"
@@ -24,7 +27,7 @@
         android:layout_marginTop="55dp"
         android:text="Sign Up"
         android:textColor="#fff"
-        android:textSize="40sp"
+        android:textSize="55sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,36 +37,36 @@
     <EditText
         android:id="@+id/signupScreen_editText_email"
         android:layout_width="0dp"
-        android:textStyle="bold"
         android:layout_height="50dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="55dp"
         android:layout_marginEnd="24dp"
-        android:background="@drawable/rounded_corner"
         android:alpha="0.5"
+        android:background="@drawable/rounded_corner"
         android:hint="Email"
         android:paddingStart="10dp"
         android:paddingLeft="10dp"
         android:textSize="17sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signupScreen_textview_signup" />
 
     <EditText
         android:id="@+id/signupScreen_editText_password"
-        android:alpha="0.5"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
+        android:alpha="0.5"
         android:background="@drawable/rounded_corner"
         android:hint="Password"
-        android:textStyle="bold"
         android:inputType="textPassword"
         android:paddingStart="10dp"
         android:paddingLeft="10dp"
         android:textSize="17sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signupScreen_editText_email" />
@@ -78,11 +81,11 @@
         android:alpha="0.5"
         android:background="@drawable/rounded_corner"
         android:hint="Confirm Password"
-        android:textStyle="bold"
         android:inputType="textPassword"
         android:paddingStart="10dp"
         android:paddingLeft="10dp"
         android:textSize="17sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -93,7 +96,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="64dp"
         android:layout_marginEnd="24dp"
         android:text="Create Account"
         android:textColor="@color/white"
@@ -110,6 +113,7 @@
         android:layout_marginEnd="24dp"
         android:gravity="center"
         android:orientation="horizontal"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -126,9 +130,9 @@
             android:layout_height="wrap_content"
             android:padding="15dp"
             android:text="or"
-            android:textSize="18dp"
             android:textAlignment="center"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="18dp" />
 
         <View
             android:layout_width="match_parent"
@@ -146,6 +150,7 @@
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="32dp"
         android:gravity="center"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -176,26 +181,30 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@+id/signupScreen_button_createAccount"
+        android:layout_marginEnd="24dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signupScreen_button_createAccount">
 
         <TextView
             android:id="@+id/signupScreen_textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:text="Already have an account?"
             android:textSize="16dp"
-            tools:layout_editor_absoluteY="451dp"
-            android:layout_marginRight="10dp"/>
+            tools:layout_editor_absoluteY="451dp" />
 
         <TextView
             android:id="@+id/signupScreen_textView_linkLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Log in"
-            android:textSize="16dp"
             android:textColor="#1877F2"
+            android:textSize="16dp"
             tools:layout_editor_absoluteY="451dp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
