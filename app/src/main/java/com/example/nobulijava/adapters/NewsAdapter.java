@@ -18,14 +18,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.nobulijava.R;
+import com.example.nobulijava.activity.AdminDashboardActivity;
 import com.example.nobulijava.activity.AdminNewsEditActivity;
 import com.example.nobulijava.activity.AdminNewsListActivity;
 import com.example.nobulijava.activity.AdminQuizEditActivity;
+import com.example.nobulijava.activity.LoginActivity;
+import com.example.nobulijava.activity.UserDashboardActivity;
+import com.example.nobulijava.activity.UserNewsDetailsActivity;
 import com.example.nobulijava.model.NewsObj;
+import com.example.nobulijava.model.UserObj;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -77,49 +85,75 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
             textViewDatePosted = (TextView) itemView.findViewById(R.id.textView_newsList_datePosted);
             imageViewNews = (ImageView) itemView.findViewById(R.id.imageView_newsList_image);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            FirebaseUser currentUser = LoginActivity.mAuth.getCurrentUser();
+            mDatabase.child("User").child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
                 @Override
-                public void onClick(View v) {
-                    //TODO launch update screen
-                    Intent editNewsIntent = new Intent(context, AdminNewsEditActivity.class);
-                    editNewsIntent.putExtra("SelectedNews", newsDataSet.get(getAdapterPosition()));
-                    context.startActivity(editNewsIntent);
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                   UserObj user = dataSnapshot.getValue(UserObj.class);
+                    if (user.getIsAdmin()) {
+                        itemView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                //TODO launch update screen
+                                Intent editNewsIntent = new Intent(context, AdminNewsEditActivity.class);
+                                editNewsIntent.putExtra("SelectedNews", newsDataSet.get(getAdapterPosition()));
+                                context.startActivity(editNewsIntent);
+                            }
+                        });
+
+                        itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                            @Override
+                            public boolean onLongClick(View v) {
+                                AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                                alert.setTitle("Delete");
+                                alert.setMessage("Do you wanna delete this item?");
+                                alert.setCancelable(true);
+
+                                alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                                alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                        mDatabase.child("News").child(newsDataSet.get(getAdapterPosition()).getNewsID()).removeValue(new DatabaseReference.CompletionListener() {
+                                            @Override
+                                            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                                                //TODO notify deleted news
+                                            }
+                                        });
+                                    }
+                                });
+
+                                AlertDialog alertDialog = alert.create();
+                                alertDialog.show();
+                                return true;
+                            }
+                        });
+
+                    } else {
+                        itemView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent newsDetailsIntent = new Intent(context, UserNewsDetailsActivity.class);
+                                newsDetailsIntent.putExtra("SelectedNews", newsDataSet.get(getAdapterPosition()));
+                                context.startActivity(newsDetailsIntent);
+                            }
+                        });
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
                 }
             });
 
-            itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    AlertDialog.Builder alert = new AlertDialog.Builder(context);
-                    alert.setTitle("Delete");
-                    alert.setMessage("Do you wanna delete this item?");
-                    alert.setCancelable(true);
 
-                    alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    });
-
-                    alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                            mDatabase.child("News").child(newsDataSet.get(getAdapterPosition()).getNewsID()).removeValue(new DatabaseReference.CompletionListener() {
-                                @Override
-                                public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                                    //TODO notify deleted news
-                                }
-                            });
-                        }
-                    });
-
-                    AlertDialog alertDialog = alert.create();
-                    alertDialog.show();
-                    return true;
-                }
-            });
         }
 
         public void bind(NewsObj newsObj, Integer position){
