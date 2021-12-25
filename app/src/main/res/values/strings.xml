@@ -18,6 +18,8 @@
     <string name="correct_answer">Your answer is correct!</string>
     <string name="wrong_answer">Incorrect answer!</string>
     <string name="score">Your score: </string>
+    <string name="report_disclaimer">The report service is not replacement for 911 or any emergency services. If you are in immediate danger of being hurt as a direct threat or a medical emergency, call 911 and/or the appropriate authorities immediately.</string>
+    <string name="report_agreement">By using the report service, users are directly consenting to launching a third-party email client and sending the email to a list of recipients set by Nobuli Admin.</string>
     <string-array name="quizAnswer_array">
         <item>True</item>
         <item>False</item>
