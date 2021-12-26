@@ -20,6 +20,8 @@
     <string name="score">Your score: </string>
     <string name="report_disclaimer">The report service is not replacement for 911 or any emergency services. If you are in immediate danger of being hurt as a direct threat or a medical emergency, call 911 and/or the appropriate authorities immediately.</string>
     <string name="report_agreement">By using the report service, users are directly consenting to launching a third-party email client and sending the email to a list of recipients set by Nobuli Admin.</string>
+    <string name="about_cyberbullying">Cyberbullying or cyberharassment is a form of bullying or harassment using electronic means.\n\nCyberbullying and cyberharassment are also known as online bullying. It has become increasingly common, especially among teenagers, as the digital sphere has expanded and technology has advanced.\n\nCyberbullying is when someone, typically a teenager, bullies or hrasses others on the internet and other digital spaces, particularly on social media sites.</string>
+    <string name="about_contact">E-mail: cyber999@cybersecurity.my\nSMS: CYBER999 REPORT to 15888\nTel: 1-300-88-2999</string>
     <string-array name="quizAnswer_array">
         <item>True</item>
         <item>False</item>
