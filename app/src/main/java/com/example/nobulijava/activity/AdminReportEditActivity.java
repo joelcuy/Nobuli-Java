@@ -50,6 +50,8 @@ public class AdminReportEditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_report_edit);
 
+        getSupportActionBar().setTitle("Set Report Recipients");
+
         findViewById();
 
         arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, recipientObjArrayList);
