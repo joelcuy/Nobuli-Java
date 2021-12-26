@@ -70,6 +70,7 @@ public class SignupActivity extends AppCompatActivity {
         buttonCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                buttonCreateAccount.setEnabled(false);
                 String emailString = editTextEmail.getText().toString();
                 String passwordString = editTextPassword.getText().toString();
                 String confirmPasswordString = editTextConfirmPassword.getText().toString();

@@ -71,6 +71,7 @@ public class LoginActivity extends AppCompatActivity {
         buttonLoginAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                buttonLoginAccount.setEnabled(false);
                 String emailString = editTextEmail.getText().toString();
                 String passwordString = editTextPassword.getText().toString();
                 if (emailString.trim().equals("") || passwordString.trim().equals("")) {
