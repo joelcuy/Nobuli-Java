@@ -95,6 +95,7 @@ public class SignupActivity extends AppCompatActivity {
                 .addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        buttonCreateAccount.setEnabled(true);
                         if (task.isSuccessful()) {
                             // Sign in success, go to user dashboard
                             UserObj newUser = new UserObj(email, false, mAuth.getCurrentUser().getUid());

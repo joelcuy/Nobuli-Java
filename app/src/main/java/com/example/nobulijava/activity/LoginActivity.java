@@ -119,6 +119,7 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        buttonLoginAccount.setEnabled(true);
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             mDatabase.child("User").child(mAuth.getCurrentUser().getUid()).child("isAdmin").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
