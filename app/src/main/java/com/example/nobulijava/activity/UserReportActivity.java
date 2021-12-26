@@ -1,5 +1,6 @@
 package com.example.nobulijava.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,11 +11,23 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.nobulijava.R;
+import com.example.nobulijava.model.ReportRecipientObj;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.ktx.Firebase;
+
+import java.util.ArrayList;
 
 public class UserReportActivity extends AppCompatActivity {
     private EditText editTextEmailSubject;
     private EditText editTextEmailBody;
     private Button buttonSendEmail;
+    private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+    private ArrayList<String> recipientEmailArrayList = new ArrayList<>();
+    String[] recipientEmailArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +37,32 @@ public class UserReportActivity extends AppCompatActivity {
 
         findViewById();
 
-        String[] recipientAddress = {"gjoelcheah@gmail.com"};
+        mDatabase.child("Report").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                recipientEmailArrayList.clear();
+                for (DataSnapshot reportRecipientSnapshot: snapshot.getChildren()){
+                    ReportRecipientObj reportRecipientObj = reportRecipientSnapshot.getValue(ReportRecipientObj.class);
+                    recipientEmailArrayList.add(reportRecipientObj.getEmail());
+                }
+                recipientEmailArray = new String[recipientEmailArrayList.size()];
+                for (int i = 0; i < recipientEmailArrayList.size(); i++) {
+                    recipientEmailArray[i] = recipientEmailArrayList.get(i);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         buttonSendEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                composeEmail(recipientAddress,
+                composeEmail(recipientEmailArray,
                         editTextEmailSubject.getText().toString(),
                         editTextEmailBody.getText().toString()
                 );
