@@ -3,6 +3,7 @@ package com.example.nobulijava.model;
 public class ReportRecipientObj {
     private String name;
     private String email;
+    private String recipientID;
 
     public ReportRecipientObj(String name, String email) {
         this.name = name;
@@ -26,6 +27,14 @@ public class ReportRecipientObj {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getRecipientID() {
+        return recipientID;
+    }
+
+    public void setRecipientID(String recipientID) {
+        this.recipientID = recipientID;
     }
 
     @Override

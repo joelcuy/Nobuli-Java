@@ -1,11 +1,15 @@
 package com.example.nobulijava.activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -69,6 +73,7 @@ public class AdminReportEditActivity extends AppCompatActivity {
                 recipientObjArrayList.clear();
                 for (DataSnapshot recipientSnapshot : snapshot.getChildren()) {
                     ReportRecipientObj recipientObj = recipientSnapshot.getValue(ReportRecipientObj.class);
+                    recipientObj.setRecipientID(recipientSnapshot.getKey());
                     recipientObjArrayList.add(recipientObj);
                 }
                 arrayAdapter.notifyDataSetChanged();
@@ -91,6 +96,46 @@ public class AdminReportEditActivity extends AppCompatActivity {
 
                 editTextRecipientName.setText("");
                 editTextRecipientEmail.setText("");
+
+            }
+        });
+
+        listViewEmail.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(AdminReportEditActivity.this);
+                alert.setTitle("Delete");
+                alert.setMessage("Do you wanna delete this item?");
+                alert.setCancelable(true);
+
+                alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        mDatabase.child("Report").child(recipientObjArrayList.get(position).getRecipientID()).removeValue(new DatabaseReference.CompletionListener() {
+                            @Override
+                            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                            }
+                        });
+                    }
+                });
+
+                AlertDialog alertDialog = alert.create();
+                alertDialog.show();
+                return false;
+            }
+        });
+
+        listViewEmail.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
             }
         });
