@@ -39,6 +39,7 @@ public class UserQuizActivity extends AppCompatActivity implements View.OnClickL
     private RadioGroup radioGroupAnswer;
     private TextView textViewQuestion;
     private ImageView imageViewQuiz;
+    private TextView textViewQuizNo;
 
     private DatabaseReference mDatabase;
     FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -71,6 +72,7 @@ public class UserQuizActivity extends AppCompatActivity implements View.OnClickL
         radioGroupAnswer = findViewById(R.id.radioGroup_answer);
         textViewQuestion = findViewById(R.id.textView_takeQuiz_question);
         imageViewQuiz = findViewById(R.id.image_quizImage);
+        textViewQuizNo = findViewById(R.id.textView_userQuiz_quizNo);
 
         radioFalse.setOnClickListener(this);
         radioTrue.setOnClickListener(this);
@@ -92,6 +94,7 @@ public class UserQuizActivity extends AppCompatActivity implements View.OnClickL
                     scoreArrayList.add(0);
                 }
                 textViewQuestion.setText(quizObjArrayList.get(0).getQuestion());
+                textViewQuizNo.setText("Question 1 out of " + quizObjArrayList.size());
                 StorageReference gsReference = storage.getReferenceFromUrl("gs://nobulibot-ysta.appspot.com/" + FOLDER_NAME + "/" + quizObjArrayList.get(0).getQuizID());
                 gsReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
@@ -172,6 +175,7 @@ public class UserQuizActivity extends AppCompatActivity implements View.OnClickL
         if (currentQuestionIndex < quizObjArrayList.size()) {
             radioGroupAnswer.clearCheck();
             textViewQuestion.setText(quizObjArrayList.get(currentQuestionIndex).getQuestion());
+            textViewQuizNo.setText("Question " + (currentQuestionIndex + 1) + " out of " + quizObjArrayList.size());
 
             StorageReference gsReference = storage.getReferenceFromUrl("gs://nobulibot-ysta.appspot.com/" + FOLDER_NAME + "/" + quizObjArrayList.get(currentQuestionIndex).getQuizID());
             gsReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -184,7 +188,7 @@ public class UserQuizActivity extends AppCompatActivity implements View.OnClickL
         } else {
             calcScore();
             textViewQuestion.setText(getString(R.string.score) + " " + score.toString());
-//            textViewQuestion.setText(score.toString());
+            textViewQuizNo.setVisibility(View.GONE);
             buttonNext.setVisibility(View.GONE);
             buttonPrevious.setVisibility(View.GONE);
             radioTrue.setVisibility(View.GONE);

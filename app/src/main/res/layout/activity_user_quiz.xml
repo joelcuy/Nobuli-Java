@@ -7,12 +7,21 @@
     android:orientation="vertical"
     tools:context="com.example.nobulijava.activity.UserQuizActivity">
 
+    <TextView
+        android:id="@+id/textView_userQuiz_quizNo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Question - of -"
+        android:textAlignment="center"
+        android:textSize="18dp"/>
+
 
     <ImageView
         android:id="@+id/image_quizImage"
         android:layout_width="300dp"
         android:layout_height="200dp"
-        android:scaleType="fitCenter" />
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_baseline_broken_image_24"/>
 
     <TextView
         android:id="@+id/textView_takeQuiz_question"
