@@ -74,11 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                 buttonLoginAccount.setEnabled(false);
                 String emailString = editTextEmail.getText().toString();
                 String passwordString = editTextPassword.getText().toString();
-                if (emailString.trim().equals("") || passwordString.trim().equals("")) {
-                    Toast.makeText(getApplicationContext(), "Email or Passwords cannot be blank!", Toast.LENGTH_SHORT).show();
-                } else {
-                    logIn(emailString, passwordString);
-                }
+                logIn(emailString, passwordString);
             }
         });
     }
@@ -115,31 +111,38 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void logIn(String email, String password) {
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        buttonLoginAccount.setEnabled(true);
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            mDatabase.child("User").child(mAuth.getCurrentUser().getUid()).child("isAdmin").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                    //Decides if is Admin or regular user
-                                    if (task.getResult().getValue().toString().equals("false")) {
-                                        startActivity(new Intent(LoginActivity.this, UserDashboardActivity.class));
-                                    } else {
-                                        startActivity(new Intent(LoginActivity.this, AdminDashboardActivity.class));
+
+
+        if (email.trim().equals("") || password.trim().equals("")) {
+            Toast.makeText(getApplicationContext(), "Email or Passwords cannot be blank!", Toast.LENGTH_SHORT).show();
+            buttonLoginAccount.setEnabled(true);
+        } else {
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            buttonLoginAccount.setEnabled(true);
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                mDatabase.child("User").child(mAuth.getCurrentUser().getUid()).child("isAdmin").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                        //Decides if is Admin or regular user
+                                        if (task.getResult().getValue().toString().equals("false")) {
+                                            startActivity(new Intent(LoginActivity.this, UserDashboardActivity.class));
+                                        } else {
+                                            startActivity(new Intent(LoginActivity.this, AdminDashboardActivity.class));
+                                        }
+                                        finish();
                                     }
-                                    finish();
-                                }
-                            });
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                                });
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Toast.makeText(LoginActivity.this, "Incorrect password or email.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
+                    });
+        }
     }
 }

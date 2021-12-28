@@ -74,41 +74,40 @@ public class SignupActivity extends AppCompatActivity {
                 String emailString = editTextEmail.getText().toString();
                 String passwordString = editTextPassword.getText().toString();
                 String confirmPasswordString = editTextConfirmPassword.getText().toString();
-                try {
-                    if (emailString.trim().equals("") || passwordString.trim().equals("")) {
-                        Toast.makeText(getApplicationContext(), "Email or Passwords cannot be blank!", Toast.LENGTH_SHORT).show();
-                    }
-                    if (passwordString.equals(confirmPasswordString)) {
-                        signUp(emailString, passwordString);
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Passwords do not match!", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (Exception e) {
-                    Toast.makeText(SignupActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
+                        signUp(emailString, passwordString, confirmPasswordString);
+
             }
         });
     }
 
-    private void signUp(String email, String password){
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        buttonCreateAccount.setEnabled(true);
-                        if (task.isSuccessful()) {
-                            // Sign in success, go to user dashboard
-                            UserObj newUser = new UserObj(email, false, mAuth.getCurrentUser().getUid());
-                            //TODO write to database
-                            mDatabase.child("User").child(mAuth.getCurrentUser().getUid()).setValue(newUser);
-                            startActivity(new Intent(SignupActivity.this, UserDashboardActivity.class));
-                            finish();
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(SignupActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+    private void signUp(String email, String password, String confirmPassword){
+        if (email.trim().equals("") || password.trim().equals("")) {
+            Toast.makeText(getApplicationContext(), "Email or Passwords cannot be blank!", Toast.LENGTH_SHORT).show();
+        }
+        else if (password.equals(confirmPassword)) {
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, go to user dashboard
+                                UserObj newUser = new UserObj(email, false, mAuth.getCurrentUser().getUid());
+                                mDatabase.child("User").child(mAuth.getCurrentUser().getUid()).setValue(newUser);
+                                Toast.makeText(SignupActivity.this, "Account created successfully.",
+                                        Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(SignupActivity.this, UserDashboardActivity.class));
+                                finish();
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Toast.makeText(SignupActivity.this, "Account creation failed.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
+                    });
+        } else {
+            Toast.makeText(getApplicationContext(), "Passwords do not match!", Toast.LENGTH_SHORT).show();
+        }
+            buttonCreateAccount.setEnabled(true);
+
     }
 }
