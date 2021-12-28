@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="About Cyberbullying"
+        android:textColor="@color/black"
         android:textSize="18dp"
         android:textStyle="bold" />
 
@@ -26,6 +27,7 @@
         android:id="@+id/textView_adminAbout_textContact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:layout_marginTop="16dp"
         android:text="For those experiencing cyberbullying, contact relevant agencies via:"
         android:textSize="18dp"
