@@ -29,6 +29,7 @@ public class AdminNewsListActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
 
     private ArrayList<NewsObj> newsObjArrayList;
+    private ArrayList<NewsObj> reverseNewsObjArrayList;
     NewsAdapter newsAdapter;
 
     @Override
@@ -49,7 +50,8 @@ public class AdminNewsListActivity extends AppCompatActivity {
             }
         });
         newsObjArrayList = new ArrayList<>();
-        newsAdapter = new NewsAdapter(newsObjArrayList, AdminNewsListActivity.this);
+        reverseNewsObjArrayList = new ArrayList<>();
+        newsAdapter = new NewsAdapter(reverseNewsObjArrayList, AdminNewsListActivity.this);
         recyclerViewNewsList.setAdapter(newsAdapter);
     }
 
@@ -60,10 +62,15 @@ public class AdminNewsListActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 newsObjArrayList.clear();
+                reverseNewsObjArrayList.clear();
                 for (DataSnapshot quizSnapshot : dataSnapshot.getChildren()) {
                     NewsObj newsObj = quizSnapshot.getValue(NewsObj.class);
                     newsObj.setNewsID(quizSnapshot.getKey());
                     newsObjArrayList.add(newsObj);
+                }
+                for (int i = newsObjArrayList.size() - 1; i >= 0; i--) {
+                    // Append the elements in reverse order
+                    reverseNewsObjArrayList.add(newsObjArrayList.get(i));
                 }
                 newsAdapter.notifyDataSetChanged();
             }
