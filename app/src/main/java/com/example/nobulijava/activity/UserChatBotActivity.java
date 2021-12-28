@@ -35,10 +35,11 @@ import java.util.UUID;
 public class UserChatBotActivity extends AppCompatActivity implements BotReply {
 
     RecyclerView chatView;
-    MessageAdapter messageAdapter;
-    List<MessageObj> messageList = new ArrayList<>();
     EditText editMessage;
     ImageButton btnSend;
+
+    MessageAdapter messageAdapter;
+    List<MessageObj> messageList = new ArrayList<>();
 
     //dialogFlow
     private SessionsClient sessionsClient;
@@ -52,8 +53,6 @@ public class UserChatBotActivity extends AppCompatActivity implements BotReply {
         setContentView(R.layout.activity_user_chatbot);
 
         getSupportActionBar().setTitle("Nobuli Chatbot");
-
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         chatView = findViewById(R.id.chatRecyclerView);
         editMessage = findViewById(R.id.messageBoxEditText);
@@ -81,18 +80,6 @@ public class UserChatBotActivity extends AppCompatActivity implements BotReply {
 
         setUpBot();
     }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case android.R.id.home:
-//                NavUtils.navigateUpFromSameTask(this);
-//                return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
-
 
     private void setUpBot() {
         try {
@@ -126,7 +113,6 @@ public class UserChatBotActivity extends AppCompatActivity implements BotReply {
             if (!botReply.isEmpty()) {
                 messageList.add(new MessageObj(botReply, true));
                 messageAdapter.notifyDataSetChanged();
-                System.out.println("fuck");
                 Objects.requireNonNull(chatView.getLayoutManager()).scrollToPosition(messageList.size() - 1);
             } else {
                 Toast.makeText(this, "something went wrong", Toast.LENGTH_SHORT).show();
