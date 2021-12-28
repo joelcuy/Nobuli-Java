@@ -1,5 +1,7 @@
 package com.example.nobulijava.activity;
 
+import static android.view.View.GONE;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -8,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nobulijava.R;
@@ -37,6 +40,7 @@ public class UserChatBotActivity extends AppCompatActivity implements BotReply {
     RecyclerView chatView;
     EditText editMessage;
     ImageButton btnSend;
+    TextView textViewDisclaimer;
 
     MessageAdapter messageAdapter;
     List<MessageObj> messageList = new ArrayList<>();
@@ -57,6 +61,7 @@ public class UserChatBotActivity extends AppCompatActivity implements BotReply {
         chatView = findViewById(R.id.chatRecyclerView);
         editMessage = findViewById(R.id.messageBoxEditText);
         btnSend = findViewById(R.id.sendButton);
+        textViewDisclaimer = findViewById(R.id.textView_userChatBot_textDisclaimer);
 
         messageAdapter = new MessageAdapter(messageList, this);
         chatView.setAdapter(messageAdapter);
@@ -64,8 +69,10 @@ public class UserChatBotActivity extends AppCompatActivity implements BotReply {
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                textViewDisclaimer.setVisibility(GONE);
                 String message = editMessage.getText().toString();
                 if (!message.isEmpty()) {
+
                     messageList.add(new MessageObj(message, false));
                     editMessage.setText("");
                     sendMessageToBot(message);

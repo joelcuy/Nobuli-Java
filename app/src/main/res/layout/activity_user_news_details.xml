@@ -14,26 +14,27 @@
             android:id="@+id/imageView_newsDetails_image"
             android:layout_width="0dp"
             android:layout_height="180dp"
-            android:scaleType="center"
+            android:scaleType="fitCenter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/bg_message_send" />
+            android:background="@color/colorDarkGray"
+            app:srcCompat="@drawable/ic_baseline_broken_image_24" />
 
-        <TextView
-            android:id="@+id/textView_newsDetails_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
-            android:text="Title: Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-            android:textColor="@color/black"
-            android:textSize="24dp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView_newsDetails_image" />
+                <TextView
+                    android:id="@+id/textView_newsDetails_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Title: Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+                    android:textColor="@color/black"
+                    android:textSize="24dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView_newsDetails_image" />
 
                 <TextView
                     android:id="@+id/textView_newsDetails_datePosted"
@@ -44,23 +45,23 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView_newsDetails_title" />
 
-        <TextView
-            android:id="@+id/textView_newsDetails_content"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
-            android:justificationMode="inter_word"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed venenatis sem sit amet erat elementum, non molestie nulla iaculis. Nunc sed justo ornare, vehicula leo non, placerat libero. In vel sagittis lacus. Suspendisse gravida ex eget orci luctus, sit amet scelerisque ligula interdum. Nunc sit amet porta odio. Duis sed feugiat erat. Phasellus quis blandit nunc. Aliquam sagittis, enim et pellentesque lacinia, ex purus faucibus neque, id sodales metus urna et nibh.
+                <TextView
+                    android:id="@+id/textView_newsDetails_content"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:justificationMode="inter_word"
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed venenatis sem sit amet erat elementum, non molestie nulla iaculis. Nunc sed justo ornare, vehicula leo non, placerat libero. In vel sagittis lacus. Suspendisse gravida ex eget orci luctus, sit amet scelerisque ligula interdum. Nunc sit amet porta odio. Duis sed feugiat erat. Phasellus quis blandit nunc. Aliquam sagittis, enim et pellentesque lacinia, ex purus faucibus neque, id sodales metus urna et nibh.
 
 \n\n\tNunc eu mauris eros. In et metus luctus, pharetra dolor vel, tristique ipsum. Aliquam erat volutpat. Nulla eros lectus, condimentum eu feugiat eu, interdum in lacus. Pellentesque euismod est sed neque varius, a luctus neque aliquam. Mauris quis congue nulla. Mauris dictum nibh et suscipit lacinia.
 
 \n\n\tDuis ipsum neque, scelerisque quis est vitae, convallis hendrerit elit. Donec elementum metus eget ante hendrerit, non egestas augue venenatis. Fusce ultrices id nulla eu euismod. Fusce a ligula sagittis lectus sodales euismod. Donec sit amet metus ac felis congue congue et in dui. Etiam massa purus, viverra ac orci sit amet, consectetur sagittis nulla. Praesent tortor nisl, facilisis non euismod ac, dictum tempus orci. Proin nec sem metus. Fusce volutpat eleifend nibh, condimentum suscipit diam molestie ut."
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_newsDetails_datePosted" />
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_newsDetails_datePosted" />
 </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
