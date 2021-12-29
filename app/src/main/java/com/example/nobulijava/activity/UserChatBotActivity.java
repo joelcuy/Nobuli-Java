@@ -37,8 +37,8 @@ import java.util.UUID;
 
 public class UserChatBotActivity extends AppCompatActivity implements BotReply {
 
-    RecyclerView chatView;
-    EditText editMessage;
+    RecyclerView recyclerViewChat;
+    EditText editTextMessageBox;
     ImageButton btnSend;
     TextView textViewDisclaimer;
 
@@ -58,26 +58,26 @@ public class UserChatBotActivity extends AppCompatActivity implements BotReply {
 
         getSupportActionBar().setTitle("Nobuli Chatbot");
 
-        chatView = findViewById(R.id.chatRecyclerView);
-        editMessage = findViewById(R.id.messageBoxEditText);
+        recyclerViewChat = findViewById(R.id.chatRecyclerView);
+        editTextMessageBox = findViewById(R.id.messageBoxEditText);
         btnSend = findViewById(R.id.sendButton);
         textViewDisclaimer = findViewById(R.id.textView_userChatBot_textDisclaimer);
 
         messageAdapter = new MessageAdapter(messageList, this);
-        chatView.setAdapter(messageAdapter);
+        recyclerViewChat.setAdapter(messageAdapter);
 
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 textViewDisclaimer.setVisibility(GONE);
-                String message = editMessage.getText().toString();
+                String message = editTextMessageBox.getText().toString();
                 if (!message.isEmpty()) {
 
                     messageList.add(new MessageObj(message, false));
-                    editMessage.setText("");
+                    editTextMessageBox.setText("");
                     sendMessageToBot(message);
-                    Objects.requireNonNull(chatView.getAdapter()).notifyDataSetChanged();
-                    Objects.requireNonNull(chatView.getLayoutManager())
+                    Objects.requireNonNull(recyclerViewChat.getAdapter()).notifyDataSetChanged();
+                    Objects.requireNonNull(recyclerViewChat.getLayoutManager())
                             .scrollToPosition(messageList.size() - 1);
                 } else {
                     Toast.makeText(UserChatBotActivity.this, "Please enter text!", Toast.LENGTH_SHORT).show();
@@ -118,14 +118,18 @@ public class UserChatBotActivity extends AppCompatActivity implements BotReply {
         if (returnResponse != null) {
             String botReply = returnResponse.getQueryResult().getFulfillmentText();
             if (!botReply.isEmpty()) {
-                messageList.add(new MessageObj(botReply, true));
+                messageList.add(new MessageObj(botReply, true, returnResponse.getQueryResult().getIntent().getDisplayName()));
                 messageAdapter.notifyDataSetChanged();
-                Objects.requireNonNull(chatView.getLayoutManager()).scrollToPosition(messageList.size() - 1);
+                if (returnResponse.getQueryResult().getIntent().getDisplayName().equals("Identify Cyberbully - report")){
+                    messageList.add(new MessageObj("Is there anything I can help you with?", true, "null"));
+                }
+                messageAdapter.notifyDataSetChanged();
+                Objects.requireNonNull(recyclerViewChat.getLayoutManager()).scrollToPosition(messageList.size() - 1);
             } else {
-                Toast.makeText(this, "something went wrong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
             }
         } else {
-            Toast.makeText(this, "failed to connect!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Failed to connect!", Toast.LENGTH_SHORT).show();
         }
     }
 }

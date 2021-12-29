@@ -37,4 +37,32 @@
 
     </TextView>
 
+    <Button
+        android:id="@+id/button_message_action1"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:text="---"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/button_message_action2"
+        android:layout_width="230dp"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:text="---"/>
+
+    <Button
+        android:id="@+id/button_message_action3"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="---"/>
+
+    <Button
+        android:id="@+id/button_message_action4"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="---"/>
+
 </LinearLayout>
