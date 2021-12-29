@@ -11,6 +11,9 @@ public class MessageObj {
         this.isBot = isBot;
     }
 
+    public MessageObj() {
+    }
+
     public MessageObj(String text, boolean isBot, String intent) {
         this.text = text;
         this.isBot = isBot;
