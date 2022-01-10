@@ -74,16 +74,16 @@ public class UserChatBotActivity extends AppCompatActivity implements BotReply {
         messageAdapter = new MessageAdapter(messageObjArrayList, this);
         recyclerViewChat.setAdapter(messageAdapter);
 
-        mDatabase.child("Message").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                for (DataSnapshot msgSnapshot: task.getResult().getChildren()){
-                    MessageObj msgObj = msgSnapshot.getValue(MessageObj.class);
-                    messageObjArrayList.add(msgObj);
-                }
-                Objects.requireNonNull(recyclerViewChat.getAdapter()).notifyDataSetChanged();
-            }
-        });
+//        mDatabase.child("Message").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DataSnapshot> task) {
+//                for (DataSnapshot msgSnapshot: task.getResult().getChildren()){
+//                    MessageObj msgObj = msgSnapshot.getValue(MessageObj.class);
+//                    messageObjArrayList.add(msgObj);
+//                }
+//                Objects.requireNonNull(recyclerViewChat.getAdapter()).notifyDataSetChanged();
+//            }
+//        });
 
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:text="Question - of -"
         android:textAlignment="center"
-        android:textSize="18dp"/>
+        android:textSize="18dp" />
 
 
     <ImageView
@@ -21,7 +21,7 @@
         android:layout_width="300dp"
         android:layout_height="200dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_baseline_broken_image_24"/>
+        android:src="@drawable/ic_baseline_broken_image_24" />
 
     <TextView
         android:id="@+id/textView_takeQuiz_question"
@@ -33,6 +33,85 @@
         android:gravity="center_horizontal"
         android:text="@string/question"
         android:textSize="20sp" />
+
+    <TableLayout
+        android:id="@+id/table_takeQuiz_scoreFeedback"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+
+        <TableRow
+            android:background="@color/red_700">
+
+            <TextView
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:padding="8dp"
+                android:text="Score" />
+
+            <TextView
+                android:textColor="@color/white"
+                android:padding="8dp"
+                android:text="Feedback"
+                android:textStyle="bold"
+                android:textAlignment="center"/>
+        </TableRow>
+
+        <TableRow
+            android:background="@color/colorLightGray">
+
+            <TextView
+                android:padding="8dp"
+                android:text="100%" />
+
+            <TextView
+                android:maxEms="17"
+                android:padding="8dp"
+                android:text="Congratulations! You fully understand about cyberbullying! " />
+        </TableRow>
+
+        <TableRow
+            android:background="@color/chatBackground">
+
+            <TextView
+                android:padding="8dp"
+                android:text="@string/score2" />
+
+            <TextView
+                android:maxEms="17"
+                android:padding="8dp"
+                android:text="Great job! You just need to read up slightly more about cyberbullying!" />
+        </TableRow>
+
+        <TableRow
+            android:background="@color/colorLightGray">
+
+            <TextView
+                android:padding="8dp"
+                android:text="@string/score3" />
+
+            <TextView
+                android:maxEms="17"
+                android:padding="8dp"
+                android:text="You answered at least half correct! Soon you would be able to identify and understand more about cyberbullying!" />
+        </TableRow>
+
+        <TableRow
+            android:background="@color/chatBackground">
+
+            <TextView
+                android:padding="8dp"
+                android:text="@string/score4" />
+
+            <TextView
+                android:maxEms="17"
+                android:padding="8dp"
+                android:text="Don’t worry! Nobuli is here to help you understand more about cyberbullying!" />
+        </TableRow>
+
+
+    </TableLayout>
 
     <RadioGroup
         android:id="@+id/radioGroup_answer"

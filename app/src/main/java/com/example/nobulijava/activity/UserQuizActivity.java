@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class UserQuizActivity extends AppCompatActivity implements View.OnClickL
     private TextView textViewQuestion;
     private ImageView imageViewQuiz;
     private TextView textViewQuizNo;
+    private TableLayout tableScoreFeedback;
 
     private DatabaseReference mDatabase;
     FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -48,6 +50,7 @@ public class UserQuizActivity extends AppCompatActivity implements View.OnClickL
     private ArrayList<Integer> scoreArrayList = new ArrayList<>();
     private Integer currentQuestionIndex = 0;
     private Integer score = 0;
+    private Integer scorePercent = 0;
     private String FOLDER_NAME = "quiz_image";
 
     @Override
@@ -73,6 +76,7 @@ public class UserQuizActivity extends AppCompatActivity implements View.OnClickL
         textViewQuestion = findViewById(R.id.textView_takeQuiz_question);
         imageViewQuiz = findViewById(R.id.image_quizImage);
         textViewQuizNo = findViewById(R.id.textView_userQuiz_quizNo);
+        tableScoreFeedback = findViewById(R.id.table_takeQuiz_scoreFeedback);
 
         radioFalse.setOnClickListener(this);
         radioTrue.setOnClickListener(this);
@@ -187,7 +191,7 @@ public class UserQuizActivity extends AppCompatActivity implements View.OnClickL
 
         } else {
             calcScore();
-            textViewQuestion.setText(getString(R.string.score) + " " + score.toString());
+            textViewQuestion.setText("You scored " + score.toString() + " out of " + quizObjArrayList.size() + " (" + scorePercent + "%)");
             textViewQuizNo.setVisibility(View.GONE);
             buttonNext.setVisibility(View.GONE);
             buttonPrevious.setVisibility(View.GONE);
@@ -196,6 +200,7 @@ public class UserQuizActivity extends AppCompatActivity implements View.OnClickL
             imageViewQuiz.setVisibility(View.GONE);
             buttonTryAgain.setVisibility(View.VISIBLE);
             buttonMainMenu.setVisibility(View.VISIBLE);
+            tableScoreFeedback.setVisibility(View.VISIBLE);
         }
     }
 
@@ -219,5 +224,6 @@ public class UserQuizActivity extends AppCompatActivity implements View.OnClickL
         for (int i = 0; i < scoreArrayList.size(); i++){
             score = score + scoreArrayList.get(i);
         }
+        scorePercent = score * 100 / quizObjArrayList.size();
     }
 }

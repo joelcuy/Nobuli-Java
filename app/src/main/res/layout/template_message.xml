@@ -19,7 +19,7 @@
         android:minHeight="50dp"
         android:padding="10dp"
         android:text="Hi, this is a sample message."
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:textSize="16sp" />
 
     <TextView
